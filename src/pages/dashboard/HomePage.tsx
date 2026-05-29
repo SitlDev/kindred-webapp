@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuthStore } from '../../store/authStore';
 import { useCheckInStore } from '../../store/checkInStore';
 import { Coffee, MapPin, Sparkles, Flame, Eye, Lock } from 'lucide-react';
@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import confetti from 'canvas-confetti';
 import { Link } from 'react-router-dom';
 import type { CheckIn } from '../../types';
+import L from 'leaflet';
 
 export default function HomePage() {
   const { user } = useAuthStore();
@@ -17,6 +18,8 @@ export default function HomePage() {
   const [checkingIn, setCheckingIn] = useState(false);
   const [showCheckInForm, setShowCheckInForm] = useState(false);
 
+  const mapRef = useRef<L.Map | null>(null);
+
   // Initialize and load checkins
   useEffect(() => {
     if (user) {
@@ -24,6 +27,138 @@ export default function HomePage() {
       fetchCheckIns();
     }
   }, [user]);
+
+  // Leaflet map initialization
+  useEffect(() => {
+    if (activeCheckIn && document.getElementById('leaflet-map')) {
+      // Clean up previous instance
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+
+      // Center SOMA SF coordinates
+      const center: [number, number] = [37.7772, -122.4084];
+      const map = L.map('leaflet-map', {
+        zoomControl: false,
+        attributionControl: false
+      }).setView(center, 14);
+
+      mapRef.current = map;
+
+      // CartoDB Voyager Tile layer
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19
+      }).addTo(map);
+
+      // Custom Zoom Control at bottom right
+      L.control.zoom({
+        position: 'bottomright'
+      }).addTo(map);
+
+      // Glowing markers
+      const customMarkerHtml = `
+        <div class="relative w-8 h-8 flex items-center justify-center">
+          <div class="absolute w-6 h-6 rounded-full bg-[#3D5941]/20 border border-[#3D5941]/40 animate-ping"></div>
+          <div class="w-5 h-5 rounded-full bg-[#3D5941] border-2 border-white flex items-center justify-center text-[10px] shadow-md shadow-sage/40">
+            🌱
+          </div>
+        </div>
+      `;
+
+      const markerIcon = L.divIcon({
+        html: customMarkerHtml,
+        className: 'custom-leaflet-icon',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+      });
+
+      const guestMarkerHtml = `
+        <div class="relative w-8 h-8 flex items-center justify-center">
+          <div class="absolute w-6 h-6 rounded-full bg-[#C4956D]/20 border border-[#C4956D]/40 animate-ping"></div>
+          <div class="w-5 h-5 rounded-full bg-[#C4956D] border-2 border-white flex items-center justify-center text-[10px] shadow-md shadow-clay/40">
+            🔥
+          </div>
+        </div>
+      `;
+
+      const guestIcon = L.divIcon({
+        html: guestMarkerHtml,
+        className: 'custom-leaflet-icon',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+      });
+
+      // 1. Add Guest Checkin Pin
+      const guestCoords: [number, number] = activeCheckIn.location_name.toLowerCase().includes('stanford') || activeCheckIn.location_name.toLowerCase().includes('palo alto')
+        ? [37.4300, -122.1700]
+        : [37.7772, -122.4084];
+        
+      const guestMarker = L.marker(guestCoords, { icon: guestIcon }).addTo(map);
+      
+      const guestPopupHtml = `
+        <div class="p-3 font-sans text-xs text-charcoal space-y-2 min-w-[180px]">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-full bg-[#FCFAF6] border border-charcoal/10 flex items-center justify-center text-[11px] font-bold text-sage">J</div>
+            <div>
+              <h4 class="font-bold text-charcoal">${user?.display_name || 'Jane D. (Guest)'}</h4>
+              <span class="text-[9px] bg-[#C4956D]/15 text-[#C4956D] px-1.5 py-0.5 rounded font-mono font-bold">You (Active)</span>
+            </div>
+          </div>
+          <div class="border-t border-charcoal/5 pt-2">
+            <p style="margin:0; font-weight:600; font-size:10px;">📍 ${activeCheckIn.location_name}</p>
+            <p style="margin: 4px 0 0 0; color:rgba(29, 43, 30, 0.6); font-style:italic;">"${activeCheckIn.note || 'No check-in note'}"</p>
+          </div>
+        </div>
+      `;
+      guestMarker.bindPopup(guestPopupHtml);
+
+      // 2. Map other checked in users
+      nearbyCheckIns.forEach((sprout: any) => {
+        if (!sprout.user) return;
+        
+        let sproutCoords: [number, number] = [37.7772, -122.4084]; // default SOMA SF
+        if (sprout.location_name.toLowerCase().includes('blue bottle') || sprout.location_name.toLowerCase().includes('soma')) {
+          sproutCoords = sprout.location_name.toLowerCase().includes('blue bottle') ? [37.7760, -122.3995] : [37.7772, -122.4084];
+        } else if (sprout.location_name.toLowerCase().includes('figma')) {
+          sproutCoords = [37.7905, -122.4014];
+        } else if (sprout.location_name.toLowerCase().includes('stanford') || sprout.location_name.toLowerCase().includes('green library')) {
+          sproutCoords = [37.4300, -122.1700];
+        }
+
+        const sproutMarker = L.marker(sproutCoords, { icon: markerIcon }).addTo(map);
+
+        const popupHtml = `
+          <div class="p-3 font-sans text-xs text-charcoal space-y-2 min-w-[200px]">
+            <div class="flex items-center gap-2">
+              <img src="${sprout.user.profile_photo_url || '/avatars/default.png'}" class="w-8 h-8 rounded-full object-cover" />
+              <div>
+                <h4 class="font-bold text-charcoal">${sprout.user.display_name}</h4>
+                <span class="text-[9px] bg-sage/10 text-sage px-1.5 py-0.5 rounded font-mono font-bold">${sprout.user.trust_score.toFixed(1)} ★ Trust</span>
+              </div>
+            </div>
+            <div class="border-t border-charcoal/5 pt-2">
+              <p style="margin:0; font-weight:600; font-size:10px;">📍 ${sprout.location_name}</p>
+              <p style="margin: 4px 0 0 0; color:rgba(29, 43, 30, 0.7); font-style:italic;">"${sprout.note || 'No check-in note'}"</p>
+            </div>
+            <div style="border-top: 1px solid rgba(29, 43, 30, 0.05); padding-top: 8px; margin-top: 8px; text-align: right;">
+              <a href="/messages?userId=${sprout.user_id}" class="inline-flex items-center gap-1 bg-[#3D5941] hover:bg-[#2d4230] text-white px-3 py-1.5 rounded-lg text-[10px] font-bold no-underline transition-colors shadow-sm">
+                💬 Reciprocate & Message
+              </a>
+            </div>
+          </div>
+        `;
+        sproutMarker.bindPopup(popupHtml);
+      });
+    }
+
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, [activeCheckIn, checkIns]);
 
   const handleCheckIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -136,39 +271,43 @@ export default function HomePage() {
             </div>
 
             {/* Right Panel: Stylized Map Component */}
-            <div className="md:col-span-7 bg-[#FCFAF6] border border-white/10 rounded-2xl relative overflow-hidden min-h-[220px]">
-              {/* Custom SVG Stylized Map */}
-              <svg className="w-full h-full object-cover" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Land Base */}
-                <rect width="300" height="200" fill="#F4F0E6" />
-                
-                {/* Parks / Green Areas */}
-                <path d="M180 20 C220 30, 240 60, 230 90 C220 110, 190 120, 170 100 C150 80, 150 30, 180 20 Z" fill="#D3DEC9" opacity="0.8" />
-                <path d="M40 140 C80 145, 90 170, 70 190 C50 200, 20 190, 15 170 C10 150, 20 135, 40 140 Z" fill="#D3DEC9" opacity="0.8" />
-                <rect x="235" y="130" width="45" height="50" rx="10" fill="#CDE1C4" opacity="0.7" />
+            <div className="md:col-span-7 bg-[#FCFAF6] border border-white/10 rounded-2xl relative overflow-hidden min-h-[220px] flex items-stretch">
+              {activeCheckIn ? (
+                <div id="leaflet-map" className="w-full h-full min-h-[220px]" style={{ zIndex: 1 }} />
+              ) : (
+                /* Custom SVG Stylized Map */
+                <svg className="w-full h-full object-cover" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Land Base */}
+                  <rect width="300" height="200" fill="#F4F0E6" />
+                  
+                  {/* Parks / Green Areas */}
+                  <path d="M180 20 C220 30, 240 60, 230 90 C220 110, 190 120, 170 100 C150 80, 150 30, 180 20 Z" fill="#D3DEC9" opacity="0.8" />
+                  <path d="M40 140 C80 145, 90 170, 70 190 C50 200, 20 190, 15 170 C10 150, 20 135, 40 140 Z" fill="#D3DEC9" opacity="0.8" />
+                  <rect x="235" y="130" width="45" height="50" rx="10" fill="#CDE1C4" opacity="0.7" />
 
-                {/* Street Lines */}
-                <path d="M0 50 L300 50" stroke="#E2D4C1" strokeWidth="6" />
-                <path d="M0 120 L300 120" stroke="#E2D4C1" strokeWidth="6" />
-                <path d="M120 0 L120 200" stroke="#E2D4C1" strokeWidth="6" />
-                <path d="M230 0 L230 200" stroke="#E2D4C1" strokeWidth="4" />
-                <path d="M50 0 C80 50, 60 120, 80 200" stroke="#E2D4C1" strokeWidth="3" strokeDasharray="2 2" />
+                  {/* Street Lines */}
+                  <path d="M0 50 L300 50" stroke="#E2D4C1" strokeWidth="6" />
+                  <path d="M0 120 L300 120" stroke="#E2D4C1" strokeWidth="6" />
+                  <path d="M120 0 L120 200" stroke="#E2D4C1" strokeWidth="6" />
+                  <path d="M230 0 L230 200" stroke="#E2D4C1" strokeWidth="4" />
+                  <path d="M50 0 C80 50, 60 120, 80 200" stroke="#E2D4C1" strokeWidth="3" strokeDasharray="2 2" />
 
-                {/* Label text styled elegantly */}
-                <text x="130" y="35" fill="#5A4E3B" fontSize="8" fontWeight="bold" fontFamily="sans-serif">Roeenthern</text>
-                <text x="14" y="90" fill="#5A4E3B" fontSize="8" fontWeight="bold" fontFamily="sans-serif">Location</text>
-                <text x="195" y="48" fill="#2C3E35" fontSize="7" fontWeight="bold" fontFamily="sans-serif">Parks</text>
-                <text x="238" y="122" fill="#2C3E35" fontSize="7" fontWeight="bold" fontFamily="sans-serif">Neighborhood</text>
-                <text x="190" y="165" fill="#5A4E3B" fontSize="8" fontWeight="bold" fontFamily="sans-serif">Goren Park</text>
-                <text x="242" y="190" fill="#5A4E3B" fontSize="8" fontWeight="bold" fontFamily="sans-serif">Lecatiens</text>
-                
-                {/* Active Checkin Pins */}
-                <circle cx="120" cy="50" r="4" fill="#3D5941" />
-                <circle cx="120" cy="50" r="8" stroke="#3D5941" strokeWidth="1.5" opacity="0.5" className="animate-ping" />
-                
-                <circle cx="80" cy="120" r="4" fill="#C4956D" />
-                <circle cx="230" cy="120" r="4" fill="#D4A574" />
-              </svg>
+                  {/* Label text styled elegantly */}
+                  <text x="130" y="35" fill="#5A4E3B" fontSize="8" fontWeight="bold" fontFamily="sans-serif">Roeenthern</text>
+                  <text x="14" y="90" fill="#5A4E3B" fontSize="8" fontWeight="bold" fontFamily="sans-serif">Location</text>
+                  <text x="195" y="48" fill="#2C3E35" fontSize="7" fontWeight="bold" fontFamily="sans-serif">Parks</text>
+                  <text x="238" y="122" fill="#2C3E35" fontSize="7" fontWeight="bold" fontFamily="sans-serif">Neighborhood</text>
+                  <text x="190" y="165" fill="#5A4E3B" fontSize="8" fontWeight="bold" fontFamily="sans-serif">Goren Park</text>
+                  <text x="242" y="190" fill="#5A4E3B" fontSize="8" fontWeight="bold" fontFamily="sans-serif">Lecatiens</text>
+                  
+                  {/* Active Checkin Pins */}
+                  <circle cx="120" cy="50" r="4" fill="#3D5941" />
+                  <circle cx="120" cy="50" r="8" stroke="#3D5941" strokeWidth="1.5" opacity="0.5" className="animate-ping" />
+                  
+                  <circle cx="80" cy="120" r="4" fill="#C4956D" />
+                  <circle cx="230" cy="120" r="4" fill="#D4A574" />
+                </svg>
+              )}
             </div>
           </div>
 

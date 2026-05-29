@@ -1485,11 +1485,11 @@ export const mockServer = {
     return newMsg;
   },
 
-  async handleAgreement(messageId: string, status: 'accepted' | 'declined'): Promise<{ message: Message; relationship?: MentoringRelationship } | null> {
-    return this.respondToAgreement(messageId, status);
+  async handleAgreement(messageId: string, status: 'accepted' | 'declined', recipientSignature?: string): Promise<{ message: Message; relationship?: MentoringRelationship } | null> {
+    return this.respondToAgreement(messageId, status, recipientSignature);
   },
 
-  async respondToAgreement(messageId: string, status: 'accepted' | 'declined'): Promise<{ message: Message; relationship?: MentoringRelationship } | null> {
+  async respondToAgreement(messageId: string, status: 'accepted' | 'declined', recipientSignature?: string): Promise<{ message: Message; relationship?: MentoringRelationship } | null> {
     await delay(500);
     const messages = getStored<Message[]>(KEYS.MESSAGES, []);
     const relationships = getStored<MentoringRelationship[]>(KEYS.RELATIONSHIPS, []);
@@ -1498,6 +1498,9 @@ export const mockServer = {
     const msgIdx = messages.findIndex(m => m.id === messageId);
     if (msgIdx !== -1 && messages[msgIdx].agreement_data) {
       messages[msgIdx].agreement_data!.status = status;
+      if (recipientSignature) {
+        messages[msgIdx].agreement_data!.recipient_signature = recipientSignature;
+      }
       
       let relationship: MentoringRelationship | undefined;
       const relId = messages[msgIdx].agreement_data!.relationship_id;

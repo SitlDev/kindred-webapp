@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../../store/authStore';
 import { mockServer } from '../../services/mockData';
 import type { Review, User } from '../../types';
-import { Award, ShieldCheck, Sparkles, Check, HelpCircle, Star } from 'lucide-react';
+import { Award, ShieldCheck, Sparkles, Check, HelpCircle, Star, X, Printer } from 'lucide-react';
 import toast from 'react-hot-toast';
 import confetti from 'canvas-confetti';
 
@@ -19,6 +19,61 @@ export default function ProfilePage() {
   const [comment, setComment] = useState('');
   const [reviewTag, setReviewTag] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [showCertificate, setShowCertificate] = useState(false);
+  const watercolorCanvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (!showCertificate || !watercolorCanvasRef.current || !profile) return;
+    const canvas = watercolorCanvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Dynamic colors based on values
+    const colorMap: Record<string, string> = {
+      'Growth': 'rgba(210, 228, 212, 0.45)',     // Light Sage
+      'Trust': 'rgba(242, 230, 214, 0.5)',       // Warm Cream
+      'Reciprocity': 'rgba(240, 215, 190, 0.45)', // Ochre Glow
+      'Sustainability': 'rgba(194, 214, 197, 0.5)', // Grass Sage
+      'Integrity': 'rgba(224, 230, 240, 0.4)',    // Steel Blue
+      'Authenticity': 'rgba(235, 210, 220, 0.4)', // Warm Rose
+      'Community': 'rgba(245, 225, 205, 0.45)',   // Clay/Peach
+    };
+
+    // Fill with base cream white
+    ctx.fillStyle = '#FAF8F3';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw soft watercolor blobs
+    const activeValues = profile.values && profile.values.length > 0 ? profile.values : ['Trust', 'Growth', 'Reciprocity'];
+    
+    activeValues.forEach((val, i) => {
+      const color = colorMap[val] || 'rgba(210, 228, 212, 0.3)';
+      const x = canvas.width * (0.3 + (i * 0.2) + Math.random() * 0.05);
+      const y = canvas.height * (0.3 + ((i % 2) * 0.3) + Math.random() * 0.05);
+      const r = canvas.width * (0.25 + Math.random() * 0.1);
+
+      const grad = ctx.createRadialGradient(x, y, 10, x, y, r);
+      grad.addColorStop(0, color);
+      grad.addColorStop(0.6, color.replace('0.45', '0.2').replace('0.5', '0.25').replace('0.4', '0.15'));
+      grad.addColorStop(1, 'rgba(250, 248, 243, 0)');
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Add texture
+    ctx.fillStyle = 'rgba(29, 43, 30, 0.012)';
+    for (let i = 0; i < 30; i++) {
+      ctx.beginPath();
+      ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 50 + 20, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }, [showCertificate, profile]);
 
   const loadProfile = async () => {
     if (!user) return;
@@ -173,12 +228,21 @@ export default function ProfilePage() {
               )}
 
               {profile.is_founding_member && (
-                <div className="bg-ochre/10 border border-ochre/20 rounded-2xl p-3 flex gap-3 items-center text-glow-ochre">
-                  <Award className="w-5 h-5 text-ochre shrink-0" />
-                  <div className="text-xs text-left leading-normal text-ochre">
-                    <span className="font-bold block">Founding Member Circle</span>
-                    <span>Slot #{profile.founding_member_number} Joined</span>
+                <div className="bg-ochre/10 border border-ochre/20 rounded-2xl p-3.5 flex flex-col gap-3 text-glow-ochre relative overflow-hidden">
+                  <div className="flex gap-3 items-center">
+                    <Award className="w-5 h-5 text-ochre shrink-0" />
+                    <div className="text-xs text-left leading-normal text-ochre">
+                      <span className="font-bold block">Founding Member Circle</span>
+                      <span>Slot #{profile.founding_member_number} Joined</span>
+                    </div>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowCertificate(true)}
+                    className="w-full bg-ochre/20 hover:bg-ochre/30 text-ochre border border-ochre/35 text-[11px] font-bold font-mono py-2 rounded-xl transition-all hover:scale-102 mt-1"
+                  >
+                    📜 View Founding Certificate
+                  </button>
                 </div>
               )}
             </div>
@@ -349,6 +413,159 @@ export default function ProfilePage() {
         </div>
 
       </div>
+
+      {/* DYNAMIC WATERCOLOR CERTIFICATE MODAL */}
+      {showCertificate && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/40 backdrop-blur-md animate-fade-in no-print">
+          
+          {/* Certificate Container with Gold/Sage borders and Dynamic watercolor wash */}
+          <div className="bg-white rounded-3xl overflow-hidden shadow-2xl border border-charcoal/10 max-w-[700px] w-full relative flex flex-col items-center animate-scale-in">
+            
+            {/* Header controls (Close and Print) */}
+            <div className="absolute top-4 right-4 flex gap-2.5 z-10 no-print">
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="bg-sage text-white p-2.5 rounded-full shadow-md hover:bg-sage-hover hover:scale-105 transition-all flex items-center gap-1.5 text-xs font-bold font-mono"
+                title="Print Certificate"
+              >
+                <Printer className="w-4 h-4" />
+                <span>Print</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowCertificate(false)}
+                className="bg-cream p-2.5 rounded-full shadow-md hover:bg-cream-dark text-charcoal/70 hover:text-charcoal transition-all"
+                title="Close Portal"
+              >
+                <X className="w-4.5 h-4.5" />
+              </button>
+            </div>
+
+            {/* Print Area Wrap */}
+            <div 
+              id="kindred-certificate-print-area" 
+              className="w-full relative p-12 bg-white flex flex-col items-center overflow-hidden min-h-[500px]"
+              style={{ contentVisibility: 'auto' }}
+            >
+              {/* Generative Canvas Wash Backdrop */}
+              <canvas
+                ref={watercolorCanvasRef}
+                width={700}
+                height={500}
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-90 z-0"
+              />
+
+              {/* Dynamic print color adjust rules */}
+              <style dangerouslySetInnerHTML={{ __html: `
+                @media print {
+                  body * {
+                    visibility: hidden !important;
+                  }
+                  #kindred-certificate-print-area, #kindred-certificate-print-area * {
+                    visibility: visible !important;
+                  }
+                  #kindred-certificate-print-area {
+                    position: absolute !important;
+                    left: 0 !important;
+                    top: 0 !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                    margin: 0 !important;
+                    padding: 3rem !important;
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                    background-color: #FAF8F3 !important;
+                  }
+                  .no-print {
+                    display: none !important;
+                  }
+                }
+              `}} />
+
+              {/* Gold Double Border Frame */}
+              <div className="absolute inset-5 border border-sage/35 rounded-[22px] pointer-events-none z-10" />
+              <div className="absolute inset-6.5 border-2 border-ochre/25 rounded-[18px] pointer-events-none z-10" />
+
+              {/* Certificate content */}
+              <div className="relative z-10 w-full flex flex-col items-center text-center space-y-6 select-text max-w-[500px]">
+                
+                {/* Micro logo / title */}
+                <div className="space-y-1 mt-4">
+                  <span className="text-[10px] font-mono tracking-[0.2em] text-ochre uppercase font-bold">
+                    The Founding Member Circle
+                  </span>
+                  <div className="w-12 h-0.5 bg-ochre/45 mx-auto" />
+                </div>
+
+                <h1 className="font-serif text-3xl font-bold text-charcoal tracking-wide mt-2">
+                  Covenant of Alignment
+                </h1>
+
+                <p className="font-serif text-xs italic text-charcoal/60">
+                  This document serves as testament that
+                </p>
+
+                {/* Recipient Cursive/Serif Name */}
+                <div className="space-y-1 py-1.5 w-full border-b border-charcoal/5">
+                  <h2 className="font-serif italic text-4xl text-sage font-bold tracking-wide py-1.5 leading-normal">
+                    {profile.display_name}
+                  </h2>
+                </div>
+
+                <p className="text-xs text-charcoal/80 leading-relaxed font-sans max-w-[440px]">
+                  has been admitted into the <strong>Kindred Founding Circle</strong> as <strong>Member #{profile.founding_member_number}</strong> on this day of enrollment, pledged to reciprocity, collective learning, and nurturing our shared stewardship.
+                </p>
+
+                {/* Value Tags */}
+                <div className="space-y-2 py-1">
+                  <span className="text-[8px] font-mono tracking-wider text-charcoal/40 uppercase block">Values Expressed</span>
+                  <div className="flex flex-wrap justify-center gap-1.5">
+                    {profile.values.map(val => (
+                      <span key={val} className="bg-white/70 border border-ochre/25 text-ochre text-[9px] font-mono px-2.5 py-0.5 rounded-full shadow-sm">
+                        {val}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Signatures and Seals Grid */}
+                <div className="grid grid-cols-3 gap-3 w-full items-end pt-5">
+                  {/* Left Signee */}
+                  <div className="text-center space-y-1 flex flex-col items-center">
+                    <div className="font-serif italic text-sm text-sage h-7 font-bold">
+                      Liam Vance
+                    </div>
+                    <div className="w-24 h-[1px] bg-charcoal/25" />
+                    <span className="text-[8px] font-mono uppercase tracking-wider text-charcoal/50">Kindred Governance</span>
+                  </div>
+
+                  {/* Centered Seal */}
+                  <div className="flex justify-center pb-1">
+                    <div className="w-14 h-14 bg-ochre/10 rounded-full border-2 border-ochre/30 flex items-center justify-center shadow-md shadow-ochre/5 relative">
+                      <Award className="w-7 h-7 text-ochre" />
+                      <div className="absolute inset-0.5 border border-ochre/20 rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* Right Signee */}
+                  <div className="text-center space-y-1 flex flex-col items-center">
+                    <div className="font-serif italic text-xs text-charcoal/80 h-7 max-w-full truncate font-bold">
+                      {profile.legalNameFull || profile.display_name}
+                    </div>
+                    <div className="w-24 h-[1px] bg-charcoal/25" />
+                    <span className="text-[8px] font-mono uppercase tracking-wider text-charcoal/50">Founding Circle Member</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

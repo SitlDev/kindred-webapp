@@ -131,6 +131,8 @@ export interface Message {
     skills: string[];
     frequency: string;
     status: 'pending' | 'accepted' | 'declined';
+    sender_signature?: string;
+    recipient_signature?: string;
   };
 }
 

@@ -109,3 +109,26 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #C4956D;
 }
 
+/* Leaflet Custom Warm Sage/Voyager Tiles Styling */
+.leaflet-container {
+  background-color: #FAF8F5 !important;
+}
+
+.leaflet-container .leaflet-tile-pane {
+  filter: sepia(35%) hue-rotate(60deg) saturate(95%) contrast(98%) brightness(96%) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #FAF8F5 !important;
+  color: #1D2B1E !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(29, 43, 30, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(29, 43, 30, 0.08) !important;
+  padding: 4px !important;
+}
+
+.leaflet-popup-tip {
+  background: #FAF8F5 !important;
+}
+
+
