@@ -15,6 +15,10 @@
   --color-charcoal-muted: #536c60;
   --color-ochre: #D4A574;
   --color-ochre-light: #fbf6f0;
+  --color-rose: #B56C78;
+  --color-rose-light: #fdf5f6;
+  --color-indigo: #4A6B82;
+  --color-indigo-light: #f1f6fa;
   
   --font-serif: Georgia, Cambria, serif;
   --font-sans: Inter, Outfit, system-ui, sans-serif;
@@ -40,7 +44,7 @@
 
 /* Custom Base Layout Override for Premium Look */
 html, body {
-  background-color: #FAF8F5;
+  background-color: #FFFFFF;
   color: #1D2B1E;
   font-family: 'Inter', 'Outfit', system-ui, sans-serif;
   overflow-x: hidden;
@@ -54,13 +58,13 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAF8F5;
+  background: #FFFFFF;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #C4956D;
   border-radius: 9999px;
-  border: 2px solid #FAF8F5;
+  border: 2px solid #FFFFFF;
 }
 
 ::-webkit-scrollbar-thumb:hover {

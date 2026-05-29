@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { ShieldCheck, MapPin, Award, Flame, Coffee, Compass } from 'lucide-react';
+import { ShieldCheck, MapPin, Award, Flame, Coffee, Compass, PenTool } from 'lucide-react';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-cream/15 font-sans overflow-hidden flex flex-col justify-between">
+    <div className="min-h-screen bg-white font-sans overflow-hidden flex flex-col justify-between">
       {/* Landing Header */}
       <header className="w-full max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between z-10">
         <div className="flex items-center gap-2">
@@ -64,8 +64,8 @@ export default function LandingPage() {
 
         {/* Hero Interactive Graphics Overlay */}
         <div className="lg:col-span-5 relative w-full h-[400px] flex items-center justify-center animate-fade-in">
-          <div className="absolute inset-0 bg-gradient-to-tr from-sage/5 to-clay/5 rounded-full blur-3xl" />
-          <img src="/hero.png" alt="Kindred Café" className="absolute inset-0 w-full h-full object-cover rounded-3xl opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-sage/10 via-indigo/10 to-rose/10 rounded-full blur-3xl" />
+          <img src="/hero.png" alt="Kindred Café" className="absolute inset-0 w-full h-full object-cover rounded-3xl opacity-45" />
           
           {/* Card Overlay Preview */}
           <div className="relative w-full max-w-[340px] bg-white border border-charcoal/8 rounded-2xl p-6 shadow-2xl space-y-4 hover:scale-[1.02] transition-transform">
@@ -87,9 +87,9 @@ export default function LandingPage() {
             </div>
 
             <div className="flex flex-wrap gap-1.5">
-              <span className="bg-cream px-2 py-1 rounded text-[11px] font-mono text-charcoal">React</span>
-              <span className="bg-cream px-2 py-1 rounded text-[11px] font-mono text-charcoal">System Design</span>
-              <span className="bg-clay/10 px-2 py-1 rounded text-[11px] font-sans font-medium text-clay text-glow-ochre">Empathy</span>
+              <span className="bg-indigo-light text-indigo border border-indigo/20 px-2 py-1 rounded text-[11px] font-mono">React</span>
+              <span className="bg-sage-light text-sage border border-sage-border px-2 py-1 rounded text-[11px] font-mono">System Design</span>
+              <span className="bg-rose-light text-rose border border-rose/20 px-2 py-1 rounded text-[11px] font-sans font-medium">Empathy</span>
             </div>
 
             <div className="border-t border-charcoal/5 pt-3 flex justify-between items-center text-xs text-charcoal/60">
@@ -111,37 +111,37 @@ export default function LandingPage() {
           </div>
 
           {/* Floaters */}
-          <div className="absolute top-10 right-4 bg-clay text-white px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-lg hover:scale-105 transition-transform flex items-center gap-1 animate-bounce">
+          <div className="absolute top-10 right-4 bg-rose text-white px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-lg hover:scale-105 transition-transform flex items-center gap-1 animate-bounce">
             <Compass className="w-3.5 h-3.5" />
             <span>Values Matching</span>
           </div>
           
-          <div className="absolute bottom-6 left-2 bg-charcoal text-cream px-4 py-2 rounded-2xl text-xs font-medium shadow-lg flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+          <div className="absolute bottom-6 left-2 bg-indigo text-white px-4 py-2 rounded-2xl text-xs font-medium shadow-lg flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span>12 local check-ins active</span>
           </div>
         </div>
       </section>
 
       {/* Feature Grids */}
-      <section className="bg-cream/45 border-t border-b border-charcoal/10 py-16 px-6">
+      <section className="bg-slate-50/50 border-t border-b border-charcoal/10 py-16 px-6">
         <div className="max-w-[1200px] mx-auto">
           <h2 className="font-serif text-3xl font-bold text-center text-charcoal mb-12">
             Built on Core High-Trust Mechanisms
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white border border-charcoal/8 p-6.5 rounded-2xl shadow-sm space-y-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white border border-charcoal/8 p-6.5 rounded-2xl shadow-sm space-y-3.5 hover:border-sage/30 transition-all">
               <div className="w-10 h-10 rounded-xl bg-sage/10 flex items-center justify-center text-sage">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="font-serif text-lg font-bold text-charcoal">Domain Verification Only</h3>
+              <h3 className="font-serif text-lg font-bold text-charcoal">Domain Verification</h3>
               <p className="text-sm text-charcoal/70 leading-relaxed">
                 Connect your work or school email (google.com, stanford.edu) to build immediate professional credibility without uploading invasive government IDs.
               </p>
             </div>
 
-            <div className="bg-white border border-charcoal/8 p-6.5 rounded-2xl shadow-sm space-y-3.5">
+            <div className="bg-white border border-charcoal/8 p-6.5 rounded-2xl shadow-sm space-y-3.5 hover:border-clay/30 transition-all">
               <div className="w-10 h-10 rounded-xl bg-clay/10 flex items-center justify-center text-clay">
                 <MapPin className="w-6 h-6" />
               </div>
@@ -151,13 +151,23 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <div className="bg-white border border-charcoal/8 p-6.5 rounded-2xl shadow-sm space-y-3.5">
+            <div className="bg-white border border-charcoal/8 p-6.5 rounded-2xl shadow-sm space-y-3.5 hover:border-ochre/30 transition-all">
               <div className="w-10 h-10 rounded-xl bg-ochre/10 flex items-center justify-center text-ochre">
                 <Flame className="w-6 h-6" />
               </div>
-              <h3 className="font-serif text-lg font-bold text-charcoal">Behavior-Based Trust Score</h3>
+              <h3 className="font-serif text-lg font-bold text-charcoal">Reputation Streaks</h3>
               <p className="text-sm text-charcoal/70 leading-relaxed">
                 Your reputation is calculated through check-in streaks, mentoring reviews, and help-swap consistency. Integrity and showing up is what matters.
+              </p>
+            </div>
+
+            <div className="bg-white border border-charcoal/8 p-6.5 rounded-2xl shadow-sm space-y-3.5 hover:border-rose/30 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-rose/10 flex items-center justify-center text-rose">
+                <PenTool className="w-5.5 h-5.5" />
+              </div>
+              <h3 className="font-serif text-lg font-bold text-charcoal">Bilateral Covenants</h3>
+              <p className="text-sm text-charcoal/70 leading-relaxed">
+                Seal mentoring relationships with signed Reciprocity Covenants. Sign electronically using our secure in-chat canvas pad to commit to mutual growth.
               </p>
             </div>
           </div>
