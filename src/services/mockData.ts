@@ -338,6 +338,35 @@ const SEED_USERS: User[] = [
     role: 'admin',
   },
   {
+    id: 'user-anacius',
+    email: 'anacius@gmail.com',
+    email_verified: true,
+    legalFirstName: 'Anacius',
+    legalLastName: 'Admin',
+    legalNameFull: 'Anacius Admin',
+    phoneNumber: '+15551212',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'Anacius (Admin)',
+    profile_photo_url: '/avatars/marcus.png',
+    profile_photo_verified: true,
+    bio: 'Kindred Network Administrator & Community Lead. Supporting values-aligned mentoring connections.',
+    location_city: 'San Francisco, CA',
+    skills: ['Community Leadership', 'Conflict Resolution', 'Platform Governance', 'Mentoring'],
+    values: ['Integrity', 'Community', 'Trust', 'Reciprocity'],
+    help_swaps_completed: 10,
+    average_rating: 5.0,
+    total_reviews: 5,
+    check_in_streak: 5,
+    trust_score: 5.0,
+    is_founding_member: true,
+    founding_member_number: 1,
+    created_at: new Date().toISOString(),
+    account_status: 'active',
+    role: 'admin',
+  },
+  {
     id: 'pending-1',
     email: 'david.k@apple.com',
     email_verified: true,
@@ -772,8 +801,8 @@ export function initLocalStorage() {
   if (storedUsers) {
     try {
       const parsed = JSON.parse(storedUsers);
-      // Force reseed if the cache contains old Unsplash URLs or has fewer than 13 seeded profiles or lacks pending_approval accounts
-      if (parsed.length < 13 || !parsed.some((u: User) => u.account_status === 'pending_approval') || storedUsers.includes('unsplash.com')) {
+      // Force reseed if the cache contains old Unsplash URLs or lacks our new admin user or has fewer than 14 profiles or lacks pending_approval accounts
+      if (parsed.length < 14 || !parsed.some((u: User) => u.email === 'anacius@gmail.com') || !parsed.some((u: User) => u.account_status === 'pending_approval') || storedUsers.includes('unsplash.com')) {
         shouldForceReseed = true;
       }
     } catch (e) {
@@ -980,6 +1009,9 @@ export const mockServer = {
     // Accept standard guest user or seed user matching
     if (email === 'guest@kindred.org' && password_hash === 'password') {
       return { status: '2fa_required', sessionToken: 'session-guest-token' };
+    }
+    if (email.toLowerCase() === 'anacius@gmail.com' && password_hash !== 'H14Sua12') {
+      return null;
     }
     
     const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
