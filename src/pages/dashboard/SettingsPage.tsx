@@ -3,9 +3,11 @@ import { useAuthStore } from '../../store/authStore';
 import { ShieldCheck, Mail, Bell, Lock, ToggleLeft, ToggleRight } from 'lucide-react';
 import toast from 'react-hot-toast';
 import confetti from 'canvas-confetti';
+import { useLanguageStore } from '../../store/languageStore';
 
 export default function SettingsPage() {
   const { user, verifyDomainEmail } = useAuthStore();
+  const { t } = useLanguageStore();
 
   const [workEmail, setWorkEmail] = useState('');
   const [schoolEmail, setSchoolEmail] = useState('');
@@ -36,12 +38,7 @@ export default function SettingsPage() {
     setVerifyingWork(false);
 
     if (success) {
-      confetti({
-        particleCount: 80,
-        spread: 60,
-        origin: { y: 0.6 },
-        colors: ['#3D5941', '#FAF8F3']
-      });
+      confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 }, colors: ['#3D5941', '#FAF8F3'] });
       toast.success('Work Email verified! Professional Sprout Badge unlocked.');
       setWorkEmail('');
     }
@@ -99,8 +96,8 @@ export default function SettingsPage() {
   return (
     <div className="space-y-8 text-left">
       <div>
-        <h2 className="font-serif text-3xl font-bold text-charcoal">Account Settings</h2>
-        <p className="text-xs text-charcoal-muted mt-1">Configure your credentials, domain email badges, and notifications.</p>
+        <h2 className="font-serif text-3xl font-bold text-charcoal">{t('settings.accountSettings')}</h2>
+        <p className="text-xs text-charcoal-muted mt-1">{t('settings.settingsDesc')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -115,7 +112,7 @@ export default function SettingsPage() {
                 <Mail className="w-5.5 h-5.5" />
               </div>
               <div className="text-left">
-                <h3 className="font-serif text-lg font-bold text-charcoal">Verify Professional Credential</h3>
+                <h3 className="font-serif text-lg font-bold text-charcoal">{t('settings.verifyProfessional')}</h3>
                 <p className="text-xs text-charcoal-muted">Unlock a verified company badge and boost your Trust Score (+0.3).</p>
               </div>
             </div>
@@ -124,9 +121,9 @@ export default function SettingsPage() {
               <div className="bg-sage/5 border border-sage/15 rounded-2xl p-4 flex gap-3.5 items-center animate-scale-in">
                 <ShieldCheck className="w-6 h-6 text-sage shrink-0" />
                 <div className="text-xs text-left leading-normal">
-                  <span className="font-bold text-sage block">Verification Complete ✓</span>
+                  <span className="font-bold text-sage block">{t('settings.verificationComplete')}</span>
                   <span className="text-charcoal/70">
-                    Your professional email <strong>{user.work_email}</strong> is domain verified.
+                    Your professional email <strong>{user.work_email}</strong> {t('settings.domainVerified')}
                   </span>
                 </div>
               </div>
@@ -140,7 +137,7 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">Company Email Address</label>
+                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">{t('settings.companyEmail')}</label>
                   <input
                     type="email"
                     required
@@ -156,7 +153,7 @@ export default function SettingsPage() {
                   disabled={verifyingWork || !workEmail}
                   className="w-full bg-sage text-white font-medium py-3 rounded-xl hover:bg-sage-hover transition-all flex items-center justify-center gap-1.5 disabled:opacity-50"
                 >
-                  Verify Work Email
+                  {t('settings.buttonVerifyWork')}
                 </button>
               </form>
             )}
@@ -169,7 +166,7 @@ export default function SettingsPage() {
                 <Mail className="w-5.5 h-5.5" />
               </div>
               <div className="text-left">
-                <h3 className="font-serif text-lg font-bold text-charcoal">Verify Academic Credential</h3>
+                <h3 className="font-serif text-lg font-bold text-charcoal">{t('settings.verifyAcademic')}</h3>
                 <p className="text-xs text-charcoal-muted">Unlock a verified university badge and boost your Trust Score (+0.25).</p>
               </div>
             </div>
@@ -178,7 +175,7 @@ export default function SettingsPage() {
               <div className="bg-sage/5 border border-sage/15 rounded-2xl p-4 flex gap-3.5 items-center animate-scale-in">
                 <ShieldCheck className="w-6 h-6 text-sage shrink-0" />
                 <div className="text-xs text-left leading-normal">
-                  <span className="font-bold text-sage block">Verification Complete ✓</span>
+                  <span className="font-bold text-sage block">{t('settings.verificationComplete')}</span>
                   <span className="text-charcoal/70">
                     Your school domain <strong>{user.school_email}</strong> is verified.
                   </span>
@@ -194,7 +191,7 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">University Email Address</label>
+                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">{t('settings.univEmail')}</label>
                   <input
                     type="email"
                     required
@@ -210,7 +207,7 @@ export default function SettingsPage() {
                   disabled={verifyingSchool || !schoolEmail}
                   className="w-full bg-clay text-white font-medium py-3 rounded-xl hover:bg-clay/90 transition-all flex items-center justify-center gap-1.5 disabled:opacity-50"
                 >
-                  Verify School Email
+                  {t('settings.buttonVerifySchool')}
                 </button>
               </form>
             )}
@@ -223,7 +220,7 @@ export default function SettingsPage() {
                 <Mail className="w-5.5 h-5.5" />
               </div>
               <div className="text-left">
-                <h3 className="font-serif text-lg font-bold text-charcoal">Verify Local Business Owner</h3>
+                <h3 className="font-serif text-lg font-bold text-charcoal">{t('settings.verifyBusiness')}</h3>
                 <p className="text-xs text-charcoal-muted">Unlock a verified Local Business Owner badge and boost your Trust Score (+0.35).</p>
               </div>
             </div>
@@ -232,7 +229,7 @@ export default function SettingsPage() {
               <div className="bg-sage/5 border border-sage/15 rounded-2xl p-4 flex gap-3.5 items-center animate-scale-in">
                 <ShieldCheck className="w-6 h-6 text-sage shrink-0" />
                 <div className="text-xs text-left leading-normal space-y-1">
-                  <span className="font-bold text-sage block">Verification Complete ✓</span>
+                  <span className="font-bold text-sage block">{t('settings.verificationComplete')}</span>
                   <span className="text-charcoal/70 block">
                     Your local business email <strong>{user.business_email}</strong> is domain verified.
                   </span>
@@ -254,7 +251,7 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">Business Email Address</label>
+                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">{t('settings.businessEmail')}</label>
                   <input
                     type="email"
                     required
@@ -266,7 +263,7 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">Business Name (Optional)</label>
+                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">{t('settings.businessName')}</label>
                   <input
                     type="text"
                     placeholder="e.g. Kindred Cafe"
@@ -277,7 +274,7 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">Business Registration Number (Optional)</label>
+                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">{t('settings.businessRegNum')}</label>
                   <input
                     type="text"
                     placeholder="e.g. LLC-12345678"
@@ -292,7 +289,7 @@ export default function SettingsPage() {
                   disabled={verifyingBusiness || !businessEmail}
                   className="w-full bg-ochre text-white font-medium py-3 rounded-xl hover:bg-ochre/90 transition-all flex items-center justify-center gap-1.5 disabled:opacity-50 font-bold"
                 >
-                  Verify Business Email
+                  {t('settings.buttonVerifyBusiness')}
                 </button>
               </form>
             )}
@@ -307,7 +304,7 @@ export default function SettingsPage() {
           <div className="bg-white border border-charcoal/8 rounded-3xl p-6.5 shadow-sm space-y-5">
             <h3 className="font-serif text-lg font-bold text-charcoal flex items-center gap-2">
               <Lock className="w-5 h-5 text-clay" />
-              <span>Security & 2FA</span>
+              <span>{t('settings.securityTitle')}</span>
             </h3>
 
             <div className="space-y-4 text-xs leading-normal">
@@ -337,13 +334,13 @@ export default function SettingsPage() {
           <div className="bg-white border border-charcoal/8 rounded-3xl p-6.5 shadow-sm space-y-5">
             <h3 className="font-serif text-lg font-bold text-charcoal flex items-center gap-2">
               <Bell className="w-5 h-5 text-clay" />
-              <span>Preferences</span>
+              <span>{t('settings.preferencesTitle')}</span>
             </h3>
 
             <div className="space-y-4.5 select-none">
               <div className="flex justify-between items-center text-xs">
                 <div>
-                  <span className="font-bold text-charcoal block">Email Alerts</span>
+                  <span className="font-bold text-charcoal block">{t('settings.emailAlerts')}</span>
                   <span className="text-charcoal-muted">Receive newsletter updates and founding circles status.</span>
                 </div>
                 <button onClick={() => setNotifEmail(!notifEmail)} className="text-sage focus:outline-none">
@@ -353,7 +350,7 @@ export default function SettingsPage() {
 
               <div className="flex justify-between items-center text-xs">
                 <div>
-                  <span className="font-bold text-charcoal block">Check-In Broadcasts</span>
+                  <span className="font-bold text-charcoal block">{t('settings.checkInAlerts')}</span>
                   <span className="text-charcoal-muted">Let others see your location alerts when checked-in.</span>
                 </div>
                 <button onClick={() => setNotifCheckIn(!notifCheckIn)} className="text-sage focus:outline-none">
@@ -363,7 +360,7 @@ export default function SettingsPage() {
 
               <div className="flex justify-between items-center text-xs">
                 <div>
-                  <span className="font-bold text-charcoal block">Mentoring Messages</span>
+                  <span className="font-bold text-charcoal block">{t('settings.messagesAlerts')}</span>
                   <span className="text-charcoal-muted">Trigger real-time sounds/visual alerts when threads update.</span>
                 </div>
                 <button onClick={() => setNotifMessages(!notifMessages)} className="text-sage focus:outline-none">

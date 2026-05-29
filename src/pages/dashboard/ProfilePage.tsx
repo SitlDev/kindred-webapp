@@ -5,9 +5,11 @@ import type { Review, User } from '../../types';
 import { Award, ShieldCheck, Sparkles, Check, HelpCircle, Star, X, Printer } from 'lucide-react';
 import toast from 'react-hot-toast';
 import confetti from 'canvas-confetti';
+import { useLanguageStore } from '../../store/languageStore';
 
 export default function ProfilePage() {
   const { user } = useAuthStore();
+  const { t } = useLanguageStore();
   
   // State
   const [profile, setProfile] = useState<User | null>(null);
@@ -194,7 +196,7 @@ export default function ProfilePage() {
 
           {/* Verification Domain Badges List */}
           <div className="bg-white border border-charcoal/8 rounded-3xl p-6.5 shadow-sm space-y-4">
-            <h4 className="font-serif font-bold text-charcoal text-base">Verified Credentials</h4>
+            <h4 className="font-serif font-bold text-charcoal text-base">{t('profile.verifiedCredentials')}</h4>
             
             <div className="space-y-2.5">
               {profile.work_email_verified ? (
@@ -247,7 +249,7 @@ export default function ProfilePage() {
                   <div className="flex gap-3 items-center">
                     <Award className="w-5 h-5 text-ochre shrink-0" />
                     <div className="text-xs text-left leading-normal text-ochre">
-                      <span className="font-bold block">Founding Member Circle</span>
+                      <span className="font-bold block">{t('profile.foundingMemberCircle')}</span>
                       <span>Slot #{profile.founding_member_number} Joined</span>
                     </div>
                   </div>
@@ -256,7 +258,7 @@ export default function ProfilePage() {
                     onClick={() => setShowCertificate(true)}
                     className="w-full bg-ochre/20 hover:bg-ochre/30 text-ochre border border-ochre/35 text-[11px] font-bold font-mono py-2 rounded-xl transition-all hover:scale-102 mt-1"
                   >
-                    📜 View Founding Certificate
+                    {t('profile.viewCertButton')}
                   </button>
                 </div>
               )}
@@ -266,16 +268,16 @@ export default function ProfilePage() {
           {/* Local Collaboration & Interactions Rewards Board */}
           <div className="bg-white border border-charcoal/8 rounded-3xl p-6.5 shadow-sm space-y-4">
             <h4 className="font-serif font-bold text-charcoal text-base flex items-center gap-1.5">
-              🏆 Collaboration Rewards
+              🏆 {t('profile.collaborationRewards')}
             </h4>
-            <p className="text-[11px] text-charcoal-muted mt-0.5">Earn custom badges and reputation multipliers by showing up locally.</p>
+            <p className="text-[11px] text-charcoal-muted mt-0.5">{t('profile.rewardsDesc')}</p>
             
             <div className="space-y-3 pt-1">
               {profile.check_in_streak >= 5 ? (
                 <div className="bg-rose/5 border border-rose/20 rounded-2xl p-3 flex gap-3 items-center animate-scale-in">
                   <span className="text-2xl">🔥</span>
                   <div className="text-xs text-left leading-normal text-rose font-bold">
-                    <span>Consistent Steward</span>
+                    <span>{t('profile.consistentSteward')}</span>
                     <span className="text-charcoal/70 block font-normal">Active {profile.check_in_streak}-day check-in streak rewarded!</span>
                   </div>
                 </div>
@@ -283,8 +285,8 @@ export default function ProfilePage() {
                 <div className="border border-charcoal/5 border-dashed rounded-2xl p-3 flex gap-3 items-center opacity-45">
                   <span className="text-xl grayscale">🔥</span>
                   <div className="text-xs text-left leading-normal text-charcoal/60">
-                    <span className="font-bold block">Consistent Steward</span>
-                    <span>Reach a 5-day check-in streak to unlock.</span>
+                    <span className="font-bold block">{t('profile.consistentSteward')}</span>
+                    <span>{t('profile.consistentDesc')}</span>
                   </div>
                 </div>
               )}
@@ -293,7 +295,7 @@ export default function ProfilePage() {
                 <div className="bg-sage/5 border border-sage/20 rounded-2xl p-3 flex gap-3 items-center animate-scale-in">
                   <span className="text-2xl">🤝</span>
                   <div className="text-xs text-left leading-normal text-sage font-bold">
-                    <span>Reciprocity Champion</span>
+                    <span>{t('profile.reciprocityChampion')}</span>
                     <span className="text-charcoal/70 block font-normal font-sans">Successfully completed {profile.help_swaps_completed} covenants!</span>
                   </div>
                 </div>
@@ -301,14 +303,14 @@ export default function ProfilePage() {
                 <div className="border border-charcoal/5 border-dashed rounded-2xl p-3 flex gap-3 items-center opacity-45">
                   <span className="text-xl grayscale">🤝</span>
                   <div className="text-xs text-left leading-normal text-charcoal/60">
-                    <span className="font-bold block">Reciprocity Champion</span>
-                    <span>Sign & complete 1 covenant to unlock.</span>
+                    <span className="font-bold block">{t('profile.reciprocityChampion')}</span>
+                    <span>{t('profile.reciprocityDesc')}</span>
                   </div>
                 </div>
               )}
               
               <div className="bg-indigo/5 border border-indigo/15 rounded-2xl p-3.5 text-[10px] text-indigo leading-relaxed">
-                💡 <strong>Local Reward:</strong> Unlocking rewards boosts discoverability in local search by 25% and expands your Founding Circle voting weight!
+                💡 <strong>{t('nav.home')}:</strong> {t('profile.rewardsInfo')}
               </div>
             </div>
           </div>
@@ -322,8 +324,8 @@ export default function ProfilePage() {
           <div className="bg-white border border-charcoal/8 rounded-3xl p-6.5 shadow-sm space-y-5">
             <div className="flex justify-between items-start border-b border-charcoal/5 pb-4">
               <div>
-                <h3 className="font-serif text-xl font-bold text-charcoal">Covenant Trust score</h3>
-                <p className="text-xs text-charcoal-muted mt-0.5">Calculated in real time through verified streaking and contracts.</p>
+                <h3 className="font-serif text-xl font-bold text-charcoal">{t('profile.trustScoreHeading')}</h3>
+                <p className="text-xs text-charcoal-muted mt-0.5">{t('profile.trustScoreDesc')}</p>
               </div>
               <div className="bg-ochre text-white text-base font-serif font-bold px-4 py-2 rounded-xl text-glow-ochre flex items-center gap-1 shrink-0">
                 <Star className="w-4 h-4 fill-white text-white" />
@@ -334,19 +336,19 @@ export default function ProfilePage() {
             {/* Weights lists */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-cream/35 border border-charcoal/5 rounded-2xl p-4 space-y-1">
-                <span className="text-[10px] uppercase font-bold text-charcoal/40 tracking-wider block">Feedback Rating Weight</span>
+                <span className="text-[10px] uppercase font-bold text-charcoal/40 tracking-wider block">{t('profile.feedbackRatingWeight')}</span>
                 <span className="text-lg font-serif font-bold text-charcoal">+{ratingWeight.toFixed(2)}</span>
                 <span className="text-[10px] text-charcoal-muted block">Based on avg rating ⭐ {profile.average_rating || 0}</span>
               </div>
 
               <div className="bg-cream/35 border border-charcoal/5 rounded-2xl p-4 space-y-1">
-                <span className="text-[10px] uppercase font-bold text-charcoal/40 tracking-wider block">Streak Streak weight</span>
+                <span className="text-[10px] uppercase font-bold text-charcoal/40 tracking-wider block">{t('profile.checkInStreakWeight')}</span>
                 <span className="text-lg font-serif font-bold text-charcoal">+{streakWeight.toFixed(2)}</span>
                 <span className="text-[10px] text-charcoal-muted block">Based on 🔥 {profile.check_in_streak || 0} streak days</span>
               </div>
 
               <div className="bg-cream/35 border border-charcoal/5 rounded-2xl p-4 space-y-1">
-                <span className="text-[10px] uppercase font-bold text-charcoal/40 tracking-wider block">Swaps Completed weight</span>
+                <span className="text-[10px] uppercase font-bold text-charcoal/40 tracking-wider block">{t('profile.swapsWeight')}</span>
                 <span className="text-lg font-serif font-bold text-charcoal">+{swapWeight.toFixed(2)}</span>
                 <span className="text-[10px] text-charcoal-muted block">Based on {profile.help_swaps_completed || 0} complete swaps</span>
               </div>
@@ -361,15 +363,13 @@ export default function ProfilePage() {
           <div className="bg-white border border-charcoal/8 rounded-3xl p-6.5 shadow-sm space-y-4">
             <h3 className="font-serif text-xl font-bold text-charcoal flex items-center gap-1.5">
               <Sparkles className="w-5 h-5 text-ochre animate-pulse" />
-              <span>Sandbox Review Simulator</span>
+              <span>{t('profile.sandboxReviewTitle')}</span>
             </h3>
-            <p className="text-xs text-charcoal-muted -mt-2">
-              Submit simulated peer feedback to watch the averages and Trust Score recalculate in real-time!
-            </p>
+            <p className="text-xs text-charcoal-muted -mt-2">{t('profile.sandboxReviewDesc')}</p>
 
             <form onSubmit={handleReviewSubmit} className="space-y-4 grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
               <div className="md:col-span-2 space-y-1.5">
-                <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">Rating Star</label>
+                <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">{t('profile.ratingLabel')}</label>
                 <select
                   value={rating}
                   onChange={e => setRating(parseInt(e.target.value))}
@@ -398,7 +398,7 @@ export default function ProfilePage() {
               </div>
 
               <div className="md:col-span-5 space-y-1.5">
-                <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">Peer Feedback Comment</label>
+                <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">{t('profile.commentLabel')}</label>
                 <input
                   type="text"
                   required
@@ -415,7 +415,7 @@ export default function ProfilePage() {
                   disabled={submitting}
                   className="w-full bg-ochre text-white text-xs font-semibold py-3 rounded-xl hover:bg-ochre/90 transition-all flex items-center justify-center gap-1 disabled:opacity-50"
                 >
-                  Submit
+                  {t('profile.submitReview')}
                 </button>
               </div>
             </form>
@@ -423,12 +423,12 @@ export default function ProfilePage() {
 
           {/* Peer Reviews List */}
           <div className="bg-white border border-charcoal/8 rounded-3xl p-6.5 shadow-sm space-y-5">
-            <h3 className="font-serif text-xl font-bold text-charcoal">Peer Feedback Feed</h3>
+            <h3 className="font-serif text-xl font-bold text-charcoal">{t('profile.reviewFeedTitle')}</h3>
             
             <div className="space-y-4">
               {reviews.length === 0 ? (
                 <div className="text-center py-10 text-charcoal/40 text-xs">
-                  No peer reviews submitted yet. Submit a sandbox feedback above to verify!
+                  {t('profile.noReviews')}
                 </div>
               ) : (
                 reviews.map(rev => (
@@ -566,11 +566,11 @@ export default function ProfilePage() {
                 </div>
 
                 <h1 className="font-serif text-3xl font-bold text-charcoal tracking-wide mt-2">
-                  Covenant of Alignment
+                  {t('profile.certificateTitle')}
                 </h1>
 
                 <p className="font-serif text-xs italic text-charcoal/60">
-                  This document serves as testament that
+                  {t('profile.certificateSubtitle')}
                 </p>
 
                 {/* Recipient Cursive/Serif Name */}
@@ -604,7 +604,7 @@ export default function ProfilePage() {
                       Liam Vance
                     </div>
                     <div className="w-24 h-[1px] bg-charcoal/25" />
-                    <span className="text-[8px] font-mono uppercase tracking-wider text-charcoal/50">Kindred Governance</span>
+                    <span className="text-[8px] font-mono uppercase tracking-wider text-charcoal/50">{t('profile.certificateGovernance')}</span>
                   </div>
 
                   {/* Centered Seal */}
@@ -621,7 +621,7 @@ export default function ProfilePage() {
                       {profile.legalNameFull || profile.display_name}
                     </div>
                     <div className="w-24 h-[1px] bg-charcoal/25" />
-                    <span className="text-[8px] font-mono uppercase tracking-wider text-charcoal/50">Founding Circle Member</span>
+                    <span className="text-[8px] font-mono uppercase tracking-wider text-charcoal/50">{t('profile.certificateCircleMember')}</span>
                   </div>
                 </div>
 

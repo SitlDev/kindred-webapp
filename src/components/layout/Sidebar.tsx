@@ -1,22 +1,24 @@
 import { NavLink } from 'react-router-dom';
 import { Home, Search, MessageSquare, User, Settings, Shield } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
+import { useLanguageStore } from '../../store/languageStore';
 
 export default function Sidebar() {
   const { user } = useAuthStore();
+  const { t } = useLanguageStore();
 
   if (!user) return null;
 
   const navItems = [
-    { path: '/', label: 'Home', icon: Home },
-    { path: '/discover', label: 'Discover', icon: Search },
-    { path: '/messages', label: 'Messages', icon: MessageSquare },
-    { path: '/profile', label: 'Profile', icon: User },
-    { path: '/settings', label: 'Settings', icon: Settings },
+    { path: '/', label: t('nav.home'), icon: Home },
+    { path: '/discover', label: t('nav.discover'), icon: Search },
+    { path: '/messages', label: t('nav.messages'), icon: MessageSquare },
+    { path: '/profile', label: t('nav.profile'), icon: User },
+    { path: '/settings', label: t('nav.settings'), icon: Settings },
   ];
 
   if (user.role === 'admin') {
-    navItems.push({ path: '/admin', label: 'Admin Panel', icon: Shield });
+    navItems.push({ path: '/admin', label: t('nav.adminPanel'), icon: Shield });
   }
 
   return (
@@ -42,14 +44,14 @@ export default function Sidebar() {
           ))}
         </nav>
 
-        {/* Rooted Status Box in Sidebar Bottom */}
+        {/* Rooted Status Box */}
         <div className="bg-sage/5 border border-sage/10 rounded-2xl p-4">
           <div className="flex items-center gap-2 mb-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-sage animate-pulse" />
-            <span className="text-[11px] font-bold text-sage uppercase tracking-wider">Rooted Active</span>
+            <span className="text-[11px] font-bold text-sage uppercase tracking-wider">{t('nav.rootedActive')}</span>
           </div>
           <p className="text-[12px] text-charcoal/70 leading-relaxed font-sans">
-            You are actively verified. Show up locally to build real long-term community.
+            {t('nav.rootedDesc')}
           </p>
         </div>
       </aside>
