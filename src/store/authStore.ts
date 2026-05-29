@@ -14,7 +14,7 @@ interface AuthState {
   register: (data: Partial<User>) => Promise<boolean>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<boolean>;
-  verifyDomainEmail: (type: 'work' | 'school' | 'business', email: string) => Promise<boolean>;
+  verifyDomainEmail: (type: 'work' | 'school' | 'business', email: string, businessName?: string, businessRegNum?: string) => Promise<boolean>;
 }
 
 export const useAuthStore = create<AuthState>()((set, get) => {
@@ -103,7 +103,7 @@ export const useAuthStore = create<AuthState>()((set, get) => {
       }
     },
 
-    verifyDomainEmail: async (type, email) => {
+    verifyDomainEmail: async (type, email, businessName, businessRegNum) => {
       const activeUser = get().user;
       if (!activeUser) return false;
       
@@ -136,13 +136,14 @@ export const useAuthStore = create<AuthState>()((set, get) => {
             trust_score: Math.min(5.0, get().user!.trust_score + 0.25)
           };
         } else {
-          const bizName = domain.split('.')[0];
-          const niceBizName = bizName.charAt(0).toUpperCase() + bizName.slice(1) + ' & Co.';
+          const bizName = businessName || (domain.split('.')[0].charAt(0).toUpperCase() + domain.split('.')[0].slice(1) + ' & Co.');
+          const regNum = businessRegNum || `US-${Math.floor(10000000 + Math.random() * 90000000)}-B`;
           updates = {
             business_email: email,
             business_email_verified: true,
             business_domain: domain,
-            business_name: niceBizName,
+            business_name: bizName,
+            business_registration_number: regNum,
             trust_score: Math.min(5.0, get().user!.trust_score + 0.35)
           };
         }

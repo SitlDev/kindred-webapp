@@ -10,6 +10,8 @@ export default function SettingsPage() {
   const [workEmail, setWorkEmail] = useState('');
   const [schoolEmail, setSchoolEmail] = useState('');
   const [businessEmail, setBusinessEmail] = useState('');
+  const [businessName, setBusinessName] = useState('');
+  const [businessRegNum, setBusinessRegNum] = useState('');
   const [verifyingWork, setVerifyingWork] = useState(false);
   const [verifyingSchool, setVerifyingSchool] = useState(false);
   const [verifyingBusiness, setVerifyingBusiness] = useState(false);
@@ -77,7 +79,7 @@ export default function SettingsPage() {
     }
 
     setVerifyingBusiness(true);
-    const success = await verifyDomainEmail('business', businessEmail);
+    const success = await verifyDomainEmail('business', businessEmail, businessName || undefined, businessRegNum || undefined);
     setVerifyingBusiness(false);
 
     if (success) {
@@ -89,6 +91,8 @@ export default function SettingsPage() {
       });
       toast.success('Business Email verified! Local Business Owner Badge unlocked.');
       setBusinessEmail('');
+      setBusinessName('');
+      setBusinessRegNum('');
     }
   };
 
@@ -227,10 +231,16 @@ export default function SettingsPage() {
             {user.business_email_verified ? (
               <div className="bg-sage/5 border border-sage/15 rounded-2xl p-4 flex gap-3.5 items-center animate-scale-in">
                 <ShieldCheck className="w-6 h-6 text-sage shrink-0" />
-                <div className="text-xs text-left leading-normal">
+                <div className="text-xs text-left leading-normal space-y-1">
                   <span className="font-bold text-sage block">Verification Complete ✓</span>
-                  <span className="text-charcoal/70">
+                  <span className="text-charcoal/70 block">
                     Your local business email <strong>{user.business_email}</strong> is domain verified.
+                  </span>
+                  <span className="text-charcoal/70 block">
+                    <strong>Business Name:</strong> {user.business_name}
+                  </span>
+                  <span className="text-charcoal/70 block">
+                    <strong>Registration Number:</strong> {user.business_registration_number}
                   </span>
                 </div>
               </div>
@@ -251,6 +261,28 @@ export default function SettingsPage() {
                     placeholder="owner@mycafe.com"
                     value={businessEmail}
                     onChange={e => setBusinessEmail(e.target.value)}
+                    className="w-full px-4 py-2.5 bg-cream/20 border border-charcoal/10 rounded-xl text-sm focus:border-sage focus:outline-none font-medium"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">Business Name (Optional)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Kindred Cafe"
+                    value={businessName}
+                    onChange={e => setBusinessName(e.target.value)}
+                    className="w-full px-4 py-2.5 bg-cream/20 border border-charcoal/10 rounded-xl text-sm focus:border-sage focus:outline-none font-medium"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">Business Registration Number (Optional)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. LLC-12345678"
+                    value={businessRegNum}
+                    onChange={e => setBusinessRegNum(e.target.value)}
                     className="w-full px-4 py-2.5 bg-cream/20 border border-charcoal/10 rounded-xl text-sm focus:border-sage focus:outline-none font-medium"
                   />
                 </div>

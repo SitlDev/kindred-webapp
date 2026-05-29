@@ -44,6 +44,7 @@ export interface User {
   business_email_verified?: boolean;
   business_name?: string;
   business_domain?: string;
+  business_registration_number?: string;
   
   // Trust Signals
   help_swaps_completed: number;

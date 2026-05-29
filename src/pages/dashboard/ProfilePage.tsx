@@ -232,7 +232,7 @@ export default function ProfilePage() {
                   <ShieldCheck className="w-5 h-5 text-ochre shrink-0" />
                   <div className="text-xs text-left leading-normal text-ochre">
                     <span className="font-bold block">Verified Business Owner</span>
-                    <span className="text-charcoal/70">Owner @ {profile.business_name}</span>
+                    <span className="text-charcoal/70">Owner @ {profile.business_name} (Reg: {profile.business_registration_number || 'Pending'})</span>
                   </div>
                 </div>
               ) : (
