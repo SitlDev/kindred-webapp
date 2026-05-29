@@ -335,6 +335,106 @@ const SEED_USERS: User[] = [
     founding_member_number: 482,
     created_at: new Date().toISOString(),
     account_status: 'active',
+    role: 'admin',
+  },
+  {
+    id: 'pending-1',
+    email: 'david.k@apple.com',
+    email_verified: true,
+    legalFirstName: 'David',
+    legalLastName: 'Kim',
+    legalNameFull: 'David Kim',
+    phoneNumber: '+15550201',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'David Kim',
+    profile_photo_url: '/avatars/default.png',
+    profile_photo_verified: false,
+    bio: 'Hardware engineering specialist at Apple. Looking to swap design and embedded architecture help.',
+    location_city: 'Cupertino, CA',
+    skills: ['Hardware Design', 'Embedded Systems', 'C++'],
+    values: ['Integrity', 'Deep Inquiry', 'Trustworthiness'],
+    work_email: 'david.k@apple.com',
+    work_email_verified: false,
+    company_name: 'Apple',
+    job_title: 'Hardware Engineer',
+    company_domain: 'apple.com',
+    help_swaps_completed: 0,
+    average_rating: 0,
+    total_reviews: 0,
+    check_in_streak: 1,
+    trust_score: 2.0,
+    is_founding_member: false,
+    created_at: new Date().toISOString(),
+    account_status: 'pending_approval',
+    role: 'member',
+  },
+  {
+    id: 'pending-2',
+    email: 'sophia.l@mit.edu',
+    email_verified: true,
+    legalFirstName: 'Sophia',
+    legalLastName: 'Lin',
+    legalNameFull: 'Sophia Lin',
+    phoneNumber: '+15550202',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'Sophia Lin',
+    profile_photo_url: '/avatars/default.png',
+    profile_photo_verified: false,
+    bio: 'MIT Computer Science student researching cryptography and decentralized identity networks.',
+    location_city: 'Boston, MA',
+    skills: ['Cryptography', 'Blockchain', 'Discrete Math'],
+    values: ['Deep Inquiry', 'Safety First', 'Humility'],
+    school_email: 'sophia.l@mit.edu',
+    school_email_verified: false,
+    university_name: 'MIT',
+    department: 'EECS',
+    university_domain: 'mit.edu',
+    help_swaps_completed: 0,
+    average_rating: 0,
+    total_reviews: 0,
+    check_in_streak: 1,
+    trust_score: 2.0,
+    is_founding_member: false,
+    created_at: new Date().toISOString(),
+    account_status: 'pending_approval',
+    role: 'member',
+  },
+  {
+    id: 'pending-3',
+    email: 'lucas.s@netflix.com',
+    email_verified: true,
+    legalFirstName: 'Lucas',
+    legalLastName: 'Silva',
+    legalNameFull: 'Lucas Silva',
+    phoneNumber: '+15550203',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'Lucas Silva',
+    profile_photo_url: '/avatars/default.png',
+    profile_photo_verified: false,
+    bio: 'UI Architect at Netflix. Excited to swap design architecture and high scale browser loading tricks.',
+    location_city: 'Los Gatos, CA',
+    skills: ['CSS Performance', 'Accessibility', 'TypeScript'],
+    values: ['Aesthetic Calm', 'Continuous Learning', 'Collaboration'],
+    work_email: 'lucas.s@netflix.com',
+    work_email_verified: false,
+    company_name: 'Netflix',
+    job_title: 'UI Engineer',
+    company_domain: 'netflix.com',
+    help_swaps_completed: 0,
+    average_rating: 0,
+    total_reviews: 0,
+    check_in_streak: 1,
+    trust_score: 2.0,
+    is_founding_member: false,
+    created_at: new Date().toISOString(),
+    account_status: 'pending_approval',
+    role: 'member',
   }
 ];
 
@@ -672,8 +772,8 @@ export function initLocalStorage() {
   if (storedUsers) {
     try {
       const parsed = JSON.parse(storedUsers);
-      // Force reseed if the cache contains old Unsplash URLs or has fewer than 10 seeded profiles
-      if (parsed.length < 9 || storedUsers.includes('unsplash.com')) {
+      // Force reseed if the cache contains old Unsplash URLs or has fewer than 13 seeded profiles or lacks pending_approval accounts
+      if (parsed.length < 13 || !parsed.some((u: User) => u.account_status === 'pending_approval') || storedUsers.includes('unsplash.com')) {
         shouldForceReseed = true;
       }
     } catch (e) {
@@ -899,12 +999,81 @@ export const mockServer = {
       founding_member_number: users.length + 101,
       founding_member_date: new Date().toISOString(),
       created_at: new Date().toISOString(),
-      account_status: 'active',
+      account_status: 'pending_approval',
     };
     
     users.push(newUser);
     setStored(KEYS.USERS, users);
     return { userId: newId };
+  },
+
+  async approveUserAccount(userId: string): Promise<User> {
+    await delay(500);
+    const users = getStored<User[]>(KEYS.USERS, []);
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx !== -1) {
+      users[idx].account_status = 'active';
+      if (users[idx].work_email) users[idx].work_email_verified = true;
+      if (users[idx].school_email) users[idx].school_email_verified = true;
+      users[idx].trust_score = 3.0;
+      setStored(KEYS.USERS, users);
+      return users[idx];
+    }
+    throw new Error('User not found');
+  },
+
+  async suspendUserAccount(userId: string): Promise<User> {
+    await delay(400);
+    const users = getStored<User[]>(KEYS.USERS, []);
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx !== -1) {
+      users[idx].account_status = 'suspended';
+      setStored(KEYS.USERS, users);
+      return users[idx];
+    }
+    throw new Error('User not found');
+  },
+
+  async restoreUserAccount(userId: string): Promise<User> {
+    await delay(400);
+    const users = getStored<User[]>(KEYS.USERS, []);
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx !== -1) {
+      users[idx].account_status = 'active';
+      setStored(KEYS.USERS, users);
+      return users[idx];
+    }
+    throw new Error('User not found');
+  },
+
+  async verifyUserDomainManually(userId: string, type: 'work' | 'school'): Promise<User> {
+    await delay(400);
+    const users = getStored<User[]>(KEYS.USERS, []);
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx !== -1) {
+      if (type === 'work') {
+        users[idx].work_email_verified = true;
+      } else {
+        users[idx].school_email_verified = true;
+      }
+      users[idx].trust_score = parseFloat(Math.min(5.0, users[idx].trust_score + 0.5).toFixed(2));
+      setStored(KEYS.USERS, users);
+      return users[idx];
+    }
+    throw new Error('User not found');
+  },
+
+  async getAllUsers(): Promise<User[]> {
+    await delay(300);
+    return getStored<User[]>(KEYS.USERS, []);
+  },
+
+  async declineUserAccount(userId: string): Promise<boolean> {
+    await delay(400);
+    const users = getStored<User[]>(KEYS.USERS, []);
+    const filtered = users.filter(u => u.id !== userId);
+    setStored(KEYS.USERS, filtered);
+    return true;
   },
 
   // --- DISCOVERY & USERS ---

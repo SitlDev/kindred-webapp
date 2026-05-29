@@ -53,8 +53,9 @@ export interface User {
   founding_member_number?: number;
   founding_member_date?: string;
   
+  role?: 'member' | 'admin';
   created_at: string;
-  account_status: 'active' | 'suspended';
+  account_status: 'active' | 'suspended' | 'pending_approval';
 }
 
 export interface CheckIn {

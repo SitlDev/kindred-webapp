@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Search, MessageSquare, User, Settings } from 'lucide-react';
+import { Home, Search, MessageSquare, User, Settings, Shield } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 
 export default function Sidebar() {
@@ -14,6 +14,10 @@ export default function Sidebar() {
     { path: '/profile', label: 'Profile', icon: User },
     { path: '/settings', label: 'Settings', icon: Settings },
   ];
+
+  if (user.role === 'admin') {
+    navItems.push({ path: '/admin', label: 'Admin Panel', icon: Shield });
+  }
 
   return (
     <>

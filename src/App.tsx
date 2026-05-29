@@ -10,6 +10,7 @@ import LandingPage from './pages/landing/LandingPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import Verify2FAPage from './pages/auth/Verify2FAPage';
+import PendingApprovalPage from './pages/auth/PendingApprovalPage';
 
 // Protected Dashboard Pages
 import HomePage from './pages/dashboard/HomePage';
@@ -17,9 +18,28 @@ import DiscoverPage from './pages/dashboard/DiscoverPage';
 import MessagesPage from './pages/dashboard/MessagesPage';
 import ProfilePage from './pages/dashboard/ProfilePage';
 import SettingsPage from './pages/dashboard/SettingsPage';
+import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 
 export default function App() {
-  const { token } = useAuthStore();
+  const { token, user } = useAuthStore();
+
+  // Onboarding pending approval redirect guard
+  if (token && user?.account_status === 'pending_approval') {
+    return (
+      <BrowserRouter>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            className: 'font-sans text-xs font-semibold p-4 rounded-xl border border-charcoal/5 shadow-xl bg-white text-charcoal',
+            duration: 4000,
+          }}
+        />
+        <Routes>
+          <Route path="*" element={<PendingApprovalPage />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -62,6 +82,13 @@ export default function App() {
             <Route path="/messages" element={<MessagesPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/admin" element={
+              user?.role === 'admin' ? (
+                <AdminDashboardPage />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            } />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         )}
