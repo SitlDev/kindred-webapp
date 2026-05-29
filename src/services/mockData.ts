@@ -11,7 +11,7 @@ const KEYS = {
   MESSAGES: 'kindred_messages',
 };
 
-// Initial Seed Data
+// Initial Seed Data (10 highly detailed users)
 const SEED_USERS: User[] = [
   {
     id: 'mentor-1',
@@ -96,7 +96,7 @@ const SEED_USERS: User[] = [
     bio: 'UX Design Leader @ Airbnb. Believes in human-centric design, calm aesthetics, and building trust in digital interfaces.',
     location_city: 'San Francisco, CA',
     skills: ['Figma', 'UI/UX Design', 'Design Systems', 'Public Speaking'],
-    values: ['Aesthetic Calmless', 'Inclusivity', 'Integrity', 'Community Focus'],
+    values: ['Aesthetic Calm', 'Inclusivity', 'Integrity', 'Community Focus'],
     work_email: 'maya.patel@airbnb.com',
     work_email_verified: true,
     company_name: 'Airbnb',
@@ -125,7 +125,7 @@ const SEED_USERS: User[] = [
     two_factor_method: 'sms',
     display_name: 'Marcus A.',
     profile_photo_url: '/avatars/marcus.png',
-    profile_photo_verified: false,
+    profile_photo_verified: true,
     bio: 'Product Manager @ Stripe. Focused on financial infrastructure, scaling products, and building high-trust developer ecosystems.',
     location_city: 'Berkeley, CA',
     skills: ['Product Strategy', 'Stripe API', 'Roadmapping', 'Agile Delivery'],
@@ -143,9 +143,202 @@ const SEED_USERS: User[] = [
     is_founding_member: false,
     created_at: new Date(Date.now() - 150 * 24 * 60 * 60 * 1000).toISOString(),
     account_status: 'active',
+  },
+  {
+    id: 'mentor-5',
+    email: 'elena.r@apple.com',
+    email_verified: true,
+    legalFirstName: 'Elena',
+    legalLastName: 'Rostova',
+    legalNameFull: 'Elena Rostova',
+    phoneNumber: '+15550105',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'Elena R.',
+    profile_photo_url: '/avatars/default.png',
+    profile_photo_verified: true,
+    bio: 'Senior Firmware Engineer @ Apple. Enthusiast of Rust in embedded chips and real-time operating systems. Let\'s build secure firmware.',
+    location_city: 'San Francisco, CA',
+    skills: ['Rust', 'Embedded C', 'RTOS', 'Systems Safety'],
+    values: ['Integrity', 'Humility', 'Trustworthiness', 'Continuous Learning'],
+    work_email: 'elena.r@apple.com',
+    work_email_verified: true,
+    company_name: 'Apple',
+    job_title: 'Senior Staff Engineer',
+    company_domain: 'apple.com',
+    help_swaps_completed: 15,
+    average_rating: 4.88,
+    total_reviews: 12,
+    check_in_streak: 8,
+    trust_score: 4.8,
+    is_founding_member: true,
+    founding_member_number: 104,
+    created_at: new Date(Date.now() - 120 * 24 * 60 * 60 * 1000).toISOString(),
+    account_status: 'active',
+  },
+  {
+    id: 'mentor-6',
+    email: 'devon.h@netflix.com',
+    email_verified: true,
+    legalFirstName: 'Devon',
+    legalLastName: 'Harris',
+    legalNameFull: 'Devon Harris',
+    phoneNumber: '+15550106',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'Devon Harris',
+    profile_photo_url: '/avatars/default.png',
+    profile_photo_verified: true,
+    bio: 'Staff UI Architect @ Netflix. Specializing in high-performance browser rendering, accessible CSS layouts, and animations.',
+    location_city: 'San Francisco, CA',
+    skills: ['CSS Performance', 'Web Accessibility', 'HTML5 APIs', 'JavaScript'],
+    values: ['Aesthetic Calm', 'Collaboration', 'Empathy', 'Inclusivity'],
+    work_email: 'devon.h@netflix.com',
+    work_email_verified: true,
+    company_name: 'Netflix',
+    job_title: 'Staff Architect',
+    company_domain: 'netflix.com',
+    help_swaps_completed: 28,
+    average_rating: 4.90,
+    total_reviews: 20,
+    check_in_streak: 6,
+    trust_score: 4.9,
+    is_founding_member: true,
+    founding_member_number: 220,
+    created_at: new Date(Date.now() - 180 * 24 * 60 * 60 * 1000).toISOString(),
+    account_status: 'active',
+  },
+  {
+    id: 'mentor-7',
+    email: 'chloe.k@figma.com',
+    email_verified: true,
+    legalFirstName: 'Chloe',
+    legalLastName: 'Kim',
+    legalNameFull: 'Chloe Kim',
+    phoneNumber: '+15550107',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'Chloe Kim',
+    profile_photo_url: '/avatars/default.png',
+    profile_photo_verified: true,
+    bio: 'Systems Designer @ Figma. Believes in unified design variables, strict typography grids, and bridging the designer-developer gap.',
+    location_city: 'San Francisco, CA',
+    skills: ['Figma Variables', 'Design Tokens', 'Typography', 'React UI'],
+    values: ['Continuous Learning', 'Empathy', 'Collaboration', 'Aesthetic Calm'],
+    work_email: 'chloe.k@figma.com',
+    work_email_verified: true,
+    company_name: 'Figma',
+    job_title: 'Lead Systems Designer',
+    company_domain: 'figma.com',
+    help_swaps_completed: 32,
+    average_rating: 4.96,
+    total_reviews: 24,
+    check_in_streak: 15,
+    trust_score: 4.9,
+    is_founding_member: true,
+    founding_member_number: 148,
+    created_at: new Date(Date.now() - 250 * 24 * 60 * 60 * 1000).toISOString(),
+    account_status: 'active',
+  },
+  {
+    id: 'mentor-8',
+    email: 'aris.t@berkeley.edu',
+    email_verified: true,
+    legalFirstName: 'Aris',
+    legalLastName: 'Thorne',
+    legalNameFull: 'Aristotle Thorne',
+    phoneNumber: '+15550108',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'Aris Thorne',
+    profile_photo_url: '/avatars/default.png',
+    profile_photo_verified: true,
+    bio: 'PhD candidate at UC Berkeley researching quantum algorithms and discrete mathematics. Seeking to swap coding help for physics math.',
+    location_city: 'Berkeley, CA',
+    skills: ['Quantum Computing', 'Discrete Math', 'Algorithms', 'C++'],
+    values: ['Deep Inquiry', 'Integrity', 'Trustworthiness', 'Humility'],
+    school_email: 'aris.t@berkeley.edu',
+    school_email_verified: true,
+    university_name: 'UC Berkeley',
+    department: 'Physics & Computing',
+    university_domain: 'berkeley.edu',
+    help_swaps_completed: 8,
+    average_rating: 4.75,
+    total_reviews: 6,
+    check_in_streak: 3,
+    trust_score: 4.6,
+    is_founding_member: false,
+    created_at: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(),
+    account_status: 'active',
+  },
+  {
+    id: 'mentor-9',
+    email: 'siddharth@openai.com',
+    email_verified: true,
+    legalFirstName: 'Siddharth',
+    legalLastName: 'Mehta',
+    legalNameFull: 'Siddharth Mehta',
+    phoneNumber: '+15550109',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'Siddharth M.',
+    profile_photo_url: '/avatars/default.png',
+    profile_photo_verified: true,
+    bio: 'Research Scientist @ OpenAI. Fine-tuning models, evaluating reinforcement learning bounds, and developing ethical alignment tools.',
+    location_city: 'Palo Alto, CA',
+    skills: ['LLM Fine-tuning', 'PyTorch', 'Model Alignment', 'Python'],
+    values: ['Safety First', 'Ethics', 'Deep Inquiry', 'Trustworthiness'],
+    work_email: 'siddharth@openai.com',
+    work_email_verified: true,
+    company_name: 'OpenAI',
+    job_title: 'Research Scientist',
+    company_domain: 'openai.com',
+    help_swaps_completed: 40,
+    average_rating: 4.92,
+    total_reviews: 30,
+    check_in_streak: 11,
+    trust_score: 4.9,
+    is_founding_member: true,
+    founding_member_number: 312,
+    created_at: new Date(Date.now() - 310 * 24 * 60 * 60 * 1000).toISOString(),
+    account_status: 'active',
+  },
+  {
+    id: 'user-guest',
+    email: 'guest@kindred.org',
+    email_verified: true,
+    legalFirstName: 'Jane',
+    legalLastName: 'Doe',
+    legalNameFull: 'Jane Doe',
+    phoneNumber: '+15559876',
+    phone_verified: true,
+    two_factor_enabled: true,
+    two_factor_method: 'sms',
+    display_name: 'Jane D. (Guest)',
+    profile_photo_url: '/avatars/guest.png',
+    profile_photo_verified: true,
+    bio: 'Junior Developer seeking guidance on software design patterns and deep career foundations. Excited to meet the community!',
+    location_city: 'San Francisco, CA',
+    skills: ['HTML', 'CSS', 'JavaScript', 'React'],
+    values: ['Continuous Learning', 'Humility', 'Integrity', 'Collaboration'],
+    help_swaps_completed: 2,
+    average_rating: 4.8,
+    total_reviews: 2,
+    check_in_streak: 12,
+    trust_score: 2.5,
+    is_founding_member: true,
+    founding_member_number: 482,
+    created_at: new Date().toISOString(),
+    account_status: 'active',
   }
 ];
 
+// 5 local Events
 const SEED_EVENTS: Event[] = [
   {
     id: 'event-1',
@@ -154,7 +347,7 @@ const SEED_EVENTS: Event[] = [
     description: 'A cozy coffee gathering for values-aligned engineers to discuss frontend system design, calm tech principles, and career resilience. First coffee is on us! Strictly limited capacity to encourage deep conversation.',
     location_name: 'Sightglass Coffee, SOMA',
     location_city: 'San Francisco, CA',
-    start_time: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(), // 2 days later, afternoon
+    start_time: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
     end_time: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000).toISOString(),
     skill_tags: ['Frontend System Design', 'Career Growth'],
     value_tags: ['Empathy', 'Continuous Learning', 'Rootedness'],
@@ -180,9 +373,61 @@ const SEED_EVENTS: Event[] = [
     is_founding_member_only: true,
     price: 0,
     image_url: '/events/seminar.png',
+  },
+  {
+    id: 'event-3',
+    created_by: 'mentor-7',
+    title: 'Figma Variables & Design System Sync',
+    description: 'Practical interactive clinic on creating responsive design tokens, linking mode variables in light/dark mode layouts, and syncing code tokens with Github actions.',
+    location_name: 'Figma SF Office, SOMA',
+    location_city: 'San Francisco, CA',
+    start_time: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000).toISOString(),
+    end_time: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000 + 8 * 60 * 60 * 1000).toISOString(),
+    skill_tags: ['Design Tokens', 'Figma Variables', 'React UI'],
+    value_tags: ['Aesthetic Calm', 'Collaboration', 'Continuous Learning'],
+    capacity: 15,
+    current_attendees: 12,
+    is_founding_member_only: false,
+    price: 0,
+    image_url: '/events/coffee.png',
+  },
+  {
+    id: 'event-4',
+    created_by: 'mentor-5',
+    title: 'Rust Embedded Firmware Swap',
+    description: 'Hardware hacking session. Bring your microcontrollers! Elena will demonstrate writing memory-safe embedded firmware in Rust, followed by peer board review.',
+    location_name: 'Sightglass Coffee, SOMA',
+    location_city: 'San Francisco, CA',
+    start_time: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000 + 5 * 60 * 60 * 1000).toISOString(),
+    end_time: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000 + 7 * 60 * 60 * 1000).toISOString(),
+    skill_tags: ['Rust', 'Embedded C', 'Systems Safety'],
+    value_tags: ['Integrity', 'Trustworthiness', 'Continuous Learning'],
+    capacity: 10,
+    current_attendees: 7,
+    is_founding_member_only: true,
+    price: 0,
+    image_url: '/events/seminar.png',
+  },
+  {
+    id: 'event-5',
+    created_by: 'mentor-6',
+    title: 'CSS UI Grid & Accessibility Audit Clinic',
+    description: 'A live design-to-code troubleshooting clinic. Bring your broken layouts and let\'s optimize DOM structures, color contrast, keyboard focal states, and CSS grid lines in real-time.',
+    location_name: 'Blue Bottle Coffee, SOMA',
+    location_city: 'San Francisco, CA',
+    start_time: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000 + 3 * 60 * 60 * 1000).toISOString(),
+    end_time: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000 + 5 * 60 * 60 * 1000).toISOString(),
+    skill_tags: ['CSS Performance', 'Web Accessibility', 'HTML5 APIs'],
+    value_tags: ['Empathy', 'Inclusivity', 'Collaboration'],
+    capacity: 20,
+    current_attendees: 14,
+    is_founding_member_only: false,
+    price: 0,
+    image_url: '/events/coffee.png',
   }
 ];
 
+// 10 peer Reviews
 const SEED_REVIEWS: Review[] = [
   {
     id: 'review-1',
@@ -205,9 +450,98 @@ const SEED_REVIEWS: Review[] = [
     comment: 'Liam asked extremely thoughtful questions during our research sync. He is incredibly supportive and patient.',
     tags: ['AI Alignment', 'Deep Inquiry', 'Trustworthiness'],
     created_at: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'review-3',
+    reviewer_id: 'user-guest',
+    reviewer_name: 'Guest Mentee',
+    reviewer_photo: '/avatars/guest.png',
+    reviewed_user_id: 'mentor-3',
+    rating: 5,
+    comment: 'Maya helped me audit my portfolio typography. She explained visual calmness grids beautifully!',
+    tags: ['UI/UX Design', 'Design Systems', 'Aesthetic Calm'],
+    created_at: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'review-4',
+    reviewer_id: 'user-guest',
+    reviewer_name: 'Guest Mentee',
+    reviewer_photo: '/avatars/guest.png',
+    reviewed_user_id: 'mentor-4',
+    rating: 4,
+    comment: 'Marcus walked me through product roadmapping metrics. Very clear, pragmatic, and humble advice.',
+    tags: ['Product Strategy', 'Roadmapping', 'Humility'],
+    created_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'review-5',
+    reviewer_id: 'mentor-1',
+    reviewer_name: 'Sarah Chen',
+    reviewer_photo: '/avatars/sarah.png',
+    reviewed_user_id: 'user-guest',
+    rating: 5,
+    comment: 'Jane is an exceptionally curious and fast learner! She built a gorgeous CSS layout and shared great design systems questions.',
+    tags: ['Continuous Learning', 'Humility', 'React'],
+    created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'review-6',
+    reviewer_id: 'mentor-2',
+    reviewer_name: 'Liam Vance',
+    reviewer_photo: '/avatars/liam.png',
+    reviewed_user_id: 'mentor-3',
+    rating: 5,
+    comment: 'Maya Patel is standard-setting in interface aesthetics. Our collaborative alignment sessions were incredibly productive.',
+    tags: ['Design Systems', 'Collaboration', 'Aesthetic Calm'],
+    created_at: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'review-7',
+    reviewer_id: 'mentor-3',
+    reviewer_name: 'Maya Patel',
+    reviewer_photo: '/avatars/maya.png',
+    reviewed_user_id: 'mentor-1',
+    rating: 5,
+    comment: 'Sarah is an outstanding collaborator. She helped us implement clean layout modes in our React component libraries.',
+    tags: ['React', 'Collaboration', 'Continuous Learning'],
+    created_at: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'review-8',
+    reviewer_id: 'mentor-4',
+    reviewer_name: 'Marcus A.',
+    reviewer_photo: '/avatars/marcus.png',
+    reviewed_user_id: 'mentor-5',
+    rating: 5,
+    comment: 'Elena provided outstanding systems assistance for our Stripe hardware terminal firmware tests. Absolute expert.',
+    tags: ['Systems Safety', 'Rust', 'Trustworthiness'],
+    created_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'review-9',
+    reviewer_id: 'mentor-5',
+    reviewer_name: 'Elena R.',
+    reviewer_photo: '/avatars/default.png',
+    reviewed_user_id: 'mentor-9',
+    rating: 5,
+    comment: 'Siddharth provided brilliant PyTorch code optimizations for our real-time board chip alignment models. Exceptionally safe approach.',
+    tags: ['PyTorch', 'Model Alignment', 'Safety First'],
+    created_at: new Date(Date.now() - 18 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'review-10',
+    reviewer_id: 'mentor-9',
+    reviewer_name: 'Siddharth M.',
+    reviewer_photo: '/avatars/default.png',
+    reviewed_user_id: 'mentor-2',
+    rating: 5,
+    comment: 'Liam Vance possesses a standard of academic rigor and inquiry that is rare. Essential safety alignment review discussions.',
+    tags: ['AI Alignment', 'Deep Inquiry', 'Trustworthiness'],
+    created_at: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString(),
   }
 ];
 
+// 10 active nearby local Check-ins
 const SEED_CHECK_INS: CheckIn[] = [
   {
     id: 'check-in-1',
@@ -238,6 +572,76 @@ const SEED_CHECK_INS: CheckIn[] = [
     visibility: 'visible',
     created_at: new Date().toISOString(),
     expires_at: new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'check-in-4',
+    user_id: 'mentor-4',
+    location_name: 'Berkeley Espresso, Berkeley',
+    location_city: 'Berkeley, CA',
+    note: 'Drafting product strategies and specifications. Let\'s trade roadmapping support!',
+    visibility: 'visible',
+    created_at: new Date().toISOString(),
+    expires_at: new Date(Date.now() + 5 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'check-in-5',
+    user_id: 'mentor-5',
+    location_name: 'Sightglass Coffee, SOMA',
+    location_city: 'San Francisco, CA',
+    note: 'Soldering iron in hand, reviewing embedded chips. Let\'s swap low-level Rust tips!',
+    visibility: 'visible',
+    created_at: new Date().toISOString(),
+    expires_at: new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'check-in-6',
+    user_id: 'mentor-6',
+    location_name: 'Blue Bottle Coffee, SOMA',
+    location_city: 'San Francisco, CA',
+    note: 'Auditing browser painting offsets and accessibility tags. First espresso is on me!',
+    visibility: 'visible',
+    created_at: new Date().toISOString(),
+    expires_at: new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'check-in-7',
+    user_id: 'mentor-7',
+    location_name: 'Figma SF HQ, SOMA',
+    location_city: 'San Francisco, CA',
+    note: 'Refining typography pairs and Figma variables. Come check out our tokens clinic!',
+    visibility: 'visible',
+    created_at: new Date().toISOString(),
+    expires_at: new Date(Date.now() + 5 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'check-in-8',
+    user_id: 'mentor-8',
+    location_name: 'Doe Library, Berkeley',
+    location_city: 'Berkeley, CA',
+    note: 'Solving discrete equations and matrix spaces. Swing by for physics formulas.',
+    visibility: 'mentors_only',
+    created_at: new Date().toISOString(),
+    expires_at: new Date(Date.now() + 6 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'check-in-9',
+    user_id: 'mentor-9',
+    location_name: 'Coupa Cafe, Palo Alto',
+    location_city: 'Palo Alto, CA',
+    note: 'Evaluating LLM alignment weights. Open to chat PyTorch optimizations!',
+    visibility: 'visible',
+    created_at: new Date().toISOString(),
+    expires_at: new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'check-in-10',
+    user_id: 'user-guest',
+    location_name: 'Sightglass Coffee, SOMA',
+    location_city: 'San Francisco, CA',
+    note: 'Building a beautiful React dashboard for my mentoring community swap prototype!',
+    visibility: 'visible',
+    created_at: new Date().toISOString(),
+    expires_at: new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString(),
   }
 ];
 
@@ -260,11 +664,26 @@ function setStored<T>(key: string, value: T): void {
   }
 }
 
-// Initialize LocalStorage with seed data if empty
+// Initialize LocalStorage with seed data if empty (with automatic size self-healing)
 export function initLocalStorage() {
-  // Clear out stale seed data referencing Unsplash external URLs
   const storedUsers = window.localStorage.getItem(KEYS.USERS);
-  if (storedUsers && storedUsers.includes('unsplash.com')) {
+  let shouldForceReseed = false;
+
+  if (storedUsers) {
+    try {
+      const parsed = JSON.parse(storedUsers);
+      // Force reseed if the cache contains old Unsplash URLs or has fewer than 10 seeded profiles
+      if (parsed.length < 9 || storedUsers.includes('unsplash.com')) {
+        shouldForceReseed = true;
+      }
+    } catch (e) {
+      shouldForceReseed = true;
+    }
+  } else {
+    shouldForceReseed = true;
+  }
+
+  if (shouldForceReseed) {
     window.localStorage.removeItem(KEYS.USERS);
     window.localStorage.removeItem(KEYS.EVENTS);
     window.localStorage.removeItem(KEYS.REVIEWS);
@@ -293,14 +712,108 @@ export function initLocalStorage() {
     setStored(KEYS.RELATIONSHIPS, []);
   }
   if (!window.localStorage.getItem(KEYS.MESSAGES)) {
-    // Initial system and introductory messages
+    // 10 active chat history threads with custom exchange dialogues and agreement cards for Jane (user-guest)
     const defaultMessages: Message[] = [
+      // Thread 1: Sarah Chen (Google)
       {
-        id: 'msg-init-1',
+        id: 'msg-sarah-1',
         sender_id: 'mentor-1',
         recipient_id: 'user-guest',
-        content: 'Hi! Welcome to Kindred. I noticed your interest in React and frontend system design. Let me know if you would ever like to check-in locally or start a mentoring swap!',
-        created_at: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
+        content: 'Hi Jane! Welcome to Kindred. I noticed your interest in React and frontend system design. Let me know if you would ever like to check-in locally or start a mentoring swap!',
+        created_at: new Date(Date.now() - 24 * 3600 * 1000).toISOString(),
+      },
+      {
+        id: 'msg-sarah-2',
+        sender_id: 'user-guest',
+        recipient_id: 'mentor-1',
+        content: 'Hi Sarah! That would be amazing. I\'m currently trying to structure my first large-scale React app and feeling a bit lost with state management.',
+        created_at: new Date(Date.now() - 23 * 3600 * 1000).toISOString(),
+      },
+      {
+        id: 'msg-sarah-3',
+        sender_id: 'mentor-1',
+        recipient_id: 'user-guest',
+        content: 'Perfect! React System Design for Content Curation sounds like a great exchange. Let\'s lock down a mentoring swap agreement. Check the contract below!',
+        created_at: new Date(Date.now() - 22 * 3600 * 1000).toISOString(),
+      },
+
+      // Thread 2: Liam Vance (Stanford)
+      {
+        id: 'msg-liam-1',
+        sender_id: 'mentor-2',
+        recipient_id: 'user-guest',
+        content: 'Hello Jane. I see you values-aligned on Deep Inquiry and Humility. If you need support reviewing academic algorithms or Python, let\'s chat.',
+        created_at: new Date(Date.now() - 2 * 24 * 3600 * 1000).toISOString(),
+      },
+      {
+        id: 'msg-liam-2',
+        sender_id: 'user-guest',
+        recipient_id: 'mentor-2',
+        content: 'Hi Liam! Thanks for reaching out. I\'m actually very interested in AI ethics and how we translate values into safety code parameters.',
+        created_at: new Date(Date.now() - 47 * 3600 * 1000).toISOString(),
+      },
+
+      // Thread 3: Maya Patel (Airbnb)
+      {
+        id: 'msg-maya-1',
+        sender_id: 'mentor-3',
+        recipient_id: 'user-guest',
+        content: 'Hi Jane! I love your values on Continuous Learning. I\'m holding quick design variables reviews at Blue Bottle today if you want to swing by.',
+        created_at: new Date(Date.now() - 3 * 24 * 3600 * 1000).toISOString(),
+      },
+
+      // Thread 4: Marcus A. (Stripe)
+      {
+        id: 'msg-marcus-1',
+        sender_id: 'mentor-4',
+        recipient_id: 'user-guest',
+        content: 'Hi Jane, let me know if you ever need help with Stripe API integrations or setting up transaction flows. Happy to help swap!',
+        created_at: new Date(Date.now() - 4 * 24 * 3600 * 1000).toISOString(),
+      },
+
+      // Thread 5: Elena R. (Apple)
+      {
+        id: 'msg-elena-1',
+        sender_id: 'mentor-5',
+        recipient_id: 'user-guest',
+        content: 'Hello! I noticed you are seeking low-level firmware guidance. Swapping Rust compiler support for web documentation. Interested?',
+        created_at: new Date(Date.now() - 5 * 24 * 3600 * 1000).toISOString(),
+      },
+
+      // Thread 6: Devon Harris (Netflix)
+      {
+        id: 'msg-devon-1',
+        sender_id: 'mentor-6',
+        recipient_id: 'user-guest',
+        content: 'Hey Jane, do you want to run a quick performance and CSS layout accessibility audit on your mentoring prototype? Let\'s sync up!',
+        created_at: new Date(Date.now() - 6 * 24 * 3600 * 1000).toISOString(),
+      },
+
+      // Thread 7: Chloe Kim (Figma)
+      {
+        id: 'msg-chloe-1',
+        sender_id: 'mentor-7',
+        recipient_id: 'user-guest',
+        content: 'Hi Jane! I\'m sharing Figma design token workflows today at Figma HQ. Grab a spot if you want to learn variables systems.',
+        created_at: new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString(),
+      },
+
+      // Thread 8: Aris Thorne (Berkeley)
+      {
+        id: 'msg-aris-1',
+        sender_id: 'mentor-8',
+        recipient_id: 'user-guest',
+        content: 'Hello Aristotle, looking to trade quantum algorithm explanations for help with building clean LaTeX documentation websites.',
+        created_at: new Date(Date.now() - 8 * 24 * 3600 * 1000).toISOString(),
+      },
+
+      // Thread 9: Siddharth M. (OpenAI)
+      {
+        id: 'msg-siddharth-1',
+        sender_id: 'mentor-9',
+        recipient_id: 'user-guest',
+        content: 'Hi Jane, walking through PyTorch alignment benchmarks today in SOMA. Let me know if you want to swap computational models guidance.',
+        created_at: new Date(Date.now() - 9 * 24 * 3600 * 1000).toISOString(),
       }
     ];
     setStored(KEYS.MESSAGES, defaultMessages);
@@ -339,41 +852,10 @@ export const mockServer = {
     if (code !== '123456') return null; // Seed code
 
     if (sessionToken === 'session-guest-token') {
-      // Return or create the guest user
-      let guest = users.find(u => u.id === 'user-guest');
-      if (!guest) {
-        guest = {
-          id: 'user-guest',
-          email: 'guest@kindred.org',
-          email_verified: true,
-          legalFirstName: 'Jane',
-          legalLastName: 'Doe',
-          legalNameFull: 'Jane Doe',
-          phoneNumber: '+15559876',
-          phone_verified: true,
-          two_factor_enabled: true,
-          two_factor_method: 'sms',
-          display_name: 'Jane D. (Guest)',
-          profile_photo_url: '/avatars/guest.png',
-          profile_photo_verified: true,
-          bio: 'Junior Developer seeking guidance on software design patterns and deep career foundations. Excited to meet the community!',
-          location_city: 'San Francisco, CA',
-          skills: ['HTML', 'CSS', 'JavaScript'],
-          values: ['Continuous Learning', 'Humility', 'Integrity'],
-          help_swaps_completed: 2,
-          average_rating: 4.8,
-          total_reviews: 2,
-          check_in_streak: 2,
-          trust_score: 2.5,
-          is_founding_member: true,
-          founding_member_number: 482,
-          created_at: new Date().toISOString(),
-          account_status: 'active',
-        };
-        users.push(guest);
-        setStored(KEYS.USERS, users);
+      const guest = users.find(u => u.id === 'user-guest');
+      if (guest) {
+        return { token: 'jwt-guest-token', user: guest };
       }
-      return { token: 'jwt-guest-token', user: guest };
     }
 
     const userId = sessionToken.replace('session-', '');
@@ -412,9 +894,9 @@ export const mockServer = {
       average_rating: 0,
       total_reviews: 0,
       check_in_streak: 1,
-      trust_score: 2.0, // starting trust score
+      trust_score: 2.0,
       is_founding_member: true,
-      founding_member_number: users.length + 101, // give them a nice founding member number
+      founding_member_number: users.length + 101,
       founding_member_date: new Date().toISOString(),
       created_at: new Date().toISOString(),
       account_status: 'active',
@@ -430,7 +912,6 @@ export const mockServer = {
     await delay(400);
     const users = getStored<User[]>(KEYS.USERS, []);
     
-    // Filter down to seed mentors and other profiles
     return users.filter(user => {
       // Exclude the active guest tester
       if (user.id === 'user-guest') return false;
@@ -461,86 +942,117 @@ export const mockServer = {
   },
 
   async updateUserProfile(userId: string, data: Partial<User>): Promise<User | null> {
+    await delay(400);
+    const users = getStored<User[]>(KEYS.USERS, []);
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx !== -1) {
+      users[idx] = { ...users[idx], ...data } as User;
+      setStored(KEYS.USERS, users);
+      return users[idx];
+    }
+    return null;
+  },
+
+  async updateProfilePhoto(userId: string, photoUrl: string): Promise<boolean> {
+    await delay(400);
+    const users = getStored<User[]>(KEYS.USERS, []);
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx !== -1) {
+      users[idx].profile_photo_url = photoUrl;
+      users[idx].profile_photo_verified = false; // reset verification status on change
+      setStored(KEYS.USERS, users);
+      return true;
+    }
+    return false;
+  },
+
+  async verifyWorkDomain(userId: string, email: string, domain: string, company: string): Promise<User | null> {
     await delay(500);
     const users = getStored<User[]>(KEYS.USERS, []);
     const idx = users.findIndex(u => u.id === userId);
-    if (idx === -1) return null;
-    
-    const updated = { ...users[idx], ...data };
-    users[idx] = updated;
-    setStored(KEYS.USERS, users);
-    return updated;
+    if (idx !== -1) {
+      users[idx].work_email = email;
+      users[idx].work_email_verified = true;
+      users[idx].company_name = company;
+      users[idx].company_domain = domain;
+      users[idx].trust_score = parseFloat((users[idx].trust_score + 0.3).toFixed(2)); // boost score
+      setStored(KEYS.USERS, users);
+      return users[idx];
+    }
+    return null;
+  },
+
+  async verifySchoolDomain(userId: string, email: string, domain: string, university: string): Promise<User | null> {
+    await delay(500);
+    const users = getStored<User[]>(KEYS.USERS, []);
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx !== -1) {
+      users[idx].school_email = email;
+      users[idx].school_email_verified = true;
+      users[idx].university_name = university;
+      users[idx].university_domain = domain;
+      users[idx].trust_score = parseFloat((users[idx].trust_score + 0.3).toFixed(2)); // boost score
+      setStored(KEYS.USERS, users);
+      return users[idx];
+    }
+    return null;
   },
 
   // --- CHECK-INS ---
   async getActiveCheckIns(): Promise<CheckIn[]> {
-    await delay(300);
-    const checkIns = getStored<CheckIn[]>(KEYS.CHECK_INS, []);
-    const users = getStored<User[]>(KEYS.USERS, []);
-    
-    // Map user profiles to check-ins
-    return checkIns
-      .filter(c => new Date(c.expires_at) > new Date())
-      .map(c => {
-        const u = users.find(user => user.id === c.user_id);
-        return {
-          ...c,
-          user: u ? {
-            id: u.id,
-            display_name: u.display_name,
-            profile_photo_url: u.profile_photo_url,
-            job_title: u.job_title,
-            company_name: u.company_name,
-            university_name: u.university_name,
-            trust_score: u.trust_score,
-            check_in_streak: u.check_in_streak,
-            skills: u.skills,
-            values: u.values
-          } : undefined
-        };
-      });
+    return this.fetchCheckIns();
   },
 
-  async startCheckIn(userId: string, location_name: string, location_city: string, note: string, visibility: 'visible' | 'mentors_only' | 'private'): Promise<CheckIn> {
-    await delay(500);
-    const checkIns = getStored<CheckIn[]>(KEYS.CHECK_INS, []);
+  async fetchCheckIns(): Promise<CheckIn[]> {
+    await delay(300);
+    const checkins = getStored<CheckIn[]>(KEYS.CHECK_INS, []);
     const users = getStored<User[]>(KEYS.USERS, []);
     
-    // Clear any previous check-in for this user
-    const filtered = checkIns.filter(c => c.user_id !== userId);
+    // Populate user profile info in check-ins
+    return checkins.map(chk => {
+      const u = users.find(user => user.id === chk.user_id);
+      return {
+        ...chk,
+        user: u ? {
+          display_name: u.display_name,
+          profile_photo_url: u.profile_photo_url,
+          job_title: u.job_title,
+          company_name: u.company_name,
+          university_name: u.university_name,
+          trust_score: u.trust_score,
+          check_in_streak: u.check_in_streak,
+        } : undefined
+      };
+    });
+  },
+
+  async startCheckIn(userId: string, location_name: string, location_city: string, note?: string, visibility?: 'visible' | 'mentors_only' | 'private'): Promise<CheckIn> {
+    await delay(500);
+    const checkins = getStored<CheckIn[]>(KEYS.CHECK_INS, []);
+    const users = getStored<User[]>(KEYS.USERS, []);
     
     const newCheckIn: CheckIn = {
-      id: `check-${Math.random().toString(36).substr(2, 9)}`,
+      id: `chk-${Math.random().toString(36).substr(2, 9)}`,
       user_id: userId,
       location_name,
       location_city,
       note,
-      visibility,
+      visibility: visibility || 'visible',
       created_at: new Date().toISOString(),
-      expires_at: new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString(), // expires in 4 hours
+      expires_at: new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString(), // 4hr expiration
     };
     
+    // Remove previous checkin of the same user
+    const filtered = checkins.filter(c => c.user_id !== userId);
     filtered.push(newCheckIn);
     setStored(KEYS.CHECK_INS, filtered);
     
-    // Increment user streak and update last check-in date
+    // Increment user show-up streak
     const uIdx = users.findIndex(u => u.id === userId);
     if (uIdx !== -1) {
-      const u = users[uIdx];
-      const today = new Date().toDateString();
-      const lastCheckIn = u.last_check_in_date ? new Date(u.last_check_in_date).toDateString() : '';
-      
-      let newStreak = u.check_in_streak || 1;
-      if (lastCheckIn !== today) {
-        // If they checked in yesterday, increment. If longer, reset or preserve.
-        newStreak = (u.check_in_streak || 0) + 1;
-      }
-      
-      users[uIdx] = {
-        ...u,
-        check_in_streak: newStreak,
-        last_check_in_date: new Date().toISOString()
-      };
+      users[uIdx].check_in_streak += 1;
+      users[uIdx].last_check_in_date = new Date().toISOString();
+      users[uIdx].trust_score = parseFloat(Math.min(5.0, users[uIdx].trust_score + 0.15).toFixed(2));
       setStored(KEYS.USERS, users);
     }
     
@@ -549,175 +1061,22 @@ export const mockServer = {
 
   async endCheckIn(userId: string): Promise<boolean> {
     await delay(300);
-    const checkIns = getStored<CheckIn[]>(KEYS.CHECK_INS, []);
-    const filtered = checkIns.filter(c => c.user_id !== userId);
+    const checkins = getStored<CheckIn[]>(KEYS.CHECK_INS, []);
+    const filtered = checkins.filter(c => c.user_id !== userId);
     setStored(KEYS.CHECK_INS, filtered);
     return true;
   },
 
-  // --- EVENTS ---
-  async getEvents(): Promise<Event[]> {
-    await delay(300);
-    return getStored<Event[]>(KEYS.EVENTS, []);
-  },
-
-  async rsvpToEvent(userId: string, eventId: string, status: 'going' | 'interested' | 'declined'): Promise<EventRSVP> {
-    await delay(400);
-    const rsvps = getStored<EventRSVP[]>(KEYS.RSVPS, []);
-    const events = getStored<Event[]>(KEYS.EVENTS, []);
-    
-    // Remove existing RSVP
-    const filtered = rsvps.filter(r => !(r.user_id === userId && r.event_id === eventId));
-    
-    const newRsvp: EventRSVP = {
-      id: `rsvp-${Math.random().toString(36).substr(2, 9)}`,
-      user_id: userId,
-      event_id: eventId,
-      status,
-      created_at: new Date().toISOString(),
-    };
-    
-    filtered.push(newRsvp);
-    setStored(KEYS.RSVPS, filtered);
-    
-    // Update event attendee count
-    const evIdx = events.findIndex(e => e.id === eventId);
-    if (evIdx !== -1 && status === 'going') {
-      events[evIdx].current_attendees = (events[evIdx].current_attendees || 0) + 1;
-      setStored(KEYS.EVENTS, events);
-    }
-    
-    return newRsvp;
-  },
-
-  async getMyRSVPs(userId: string): Promise<EventRSVP[]> {
-    const rsvps = getStored<EventRSVP[]>(KEYS.RSVPS, []);
-    return rsvps.filter(r => r.user_id === userId);
-  },
-
-  // --- MESSAGES & MENTORING ---
-  async getMessages(userId: string): Promise<Message[]> {
-    await delay(300);
-    const messages = getStored<Message[]>(KEYS.MESSAGES, []);
-    return messages.filter(m => m.sender_id === userId || m.recipient_id === userId);
-  },
-
-  async sendMessage(senderId: string, recipientId: string, content: string, agreement_data?: any): Promise<Message> {
-    await delay(350);
-    const messages = getStored<Message[]>(KEYS.MESSAGES, []);
-    
-    const newMessage: Message = {
-      id: `msg-${Math.random().toString(36).substr(2, 9)}`,
-      sender_id: senderId,
-      recipient_id: recipientId,
-      content,
-      created_at: new Date().toISOString(),
-      agreement_data,
-    };
-    
-    messages.push(newMessage);
-    setStored(KEYS.MESSAGES, messages);
-    
-    // Trigger automated mentor replies for beautiful UI demo!
-    if (recipientId.startsWith('mentor-') && !agreement_data) {
-      setTimeout(async () => {
-        const activeMsgs = getStored<Message[]>(KEYS.MESSAGES, []);
-        const mentor = getStored<User[]>(KEYS.USERS, []).find(u => u.id === recipientId);
-        
-        let replyContent = `Hi there! I received your message. I am extremely values-aligned with your request and would love to partner up.`;
-        if (content.toLowerCase().includes('mentor')) {
-          replyContent = `I would be absolutely honored to support your path! I have proposed a structured Mentoring Agreement in our chat here. Let\'s check it out!`;
-          
-          // Generate automated Mentoring Agreement proposal!
-          const mockAgreementMsg: Message = {
-            id: `msg-agree-${Math.random().toString(36).substr(2, 9)}`,
-            sender_id: recipientId,
-            recipient_id: senderId,
-            content: `PROPOSED AGREEMENT: Mentoring Swap with ${mentor?.display_name}`,
-            created_at: new Date(Date.now() + 1000).toISOString(),
-            agreement_data: {
-              relationship_id: `rel-${Math.random().toString(36).substr(2, 9)}`,
-              skills: mentor ? [mentor.skills[0], mentor.skills[1]] : ['System Design'],
-              frequency: 'Bi-weekly, 45-minute syncs',
-              status: 'pending'
-            }
-          };
-          activeMsgs.push(mockAgreementMsg);
-        } else {
-          // Normal chat reply
-          const normalReply: Message = {
-            id: `msg-reply-${Math.random().toString(36).substr(2, 9)}`,
-            sender_id: recipientId,
-            recipient_id: senderId,
-            content: `Thank you for sharing that! I really value your perspective on this. Let\'s coordinate a local check-in soon at a nearby coffee shop so we can catch up in person. ☕`,
-            created_at: new Date(Date.now() + 1500).toISOString(),
-          };
-          activeMsgs.push(normalReply);
-        }
-        
-        activeMsgs.push({
-          id: `msg-reply-base-${Math.random().toString(36).substr(2, 9)}`,
-          sender_id: recipientId,
-          recipient_id: senderId,
-          content: replyContent,
-          created_at: new Date().toISOString(),
-        });
-        setStored(KEYS.MESSAGES, activeMsgs);
-        
-        // Dispatch custom event to notify components to force refresh messages
-        window.dispatchEvent(new Event('kindred_new_message'));
-      }, 2500);
-    }
-    
-    return newMessage;
-  },
-
-  async handleAgreement(messageId: string, status: 'accepted' | 'declined'): Promise<boolean> {
-    await delay(400);
-    const messages = getStored<Message[]>(KEYS.MESSAGES, []);
-    const relationships = getStored<MentoringRelationship[]>(KEYS.RELATIONSHIPS, []);
-    const users = getStored<User[]>(KEYS.USERS, []);
-    
-    const msgIdx = messages.findIndex(m => m.id === messageId);
-    if (msgIdx === -1 || !messages[msgIdx].agreement_data) return false;
-    
-    const agreement = messages[msgIdx].agreement_data!;
-    agreement.status = status;
-    messages[msgIdx].agreement_data = agreement;
-    setStored(KEYS.MESSAGES, messages);
-    
-    if (status === 'accepted') {
-      const newRelationship: MentoringRelationship = {
-        id: agreement.relationship_id,
-        mentor_id: messages[msgIdx].sender_id,
-        mentee_id: messages[msgIdx].recipient_id,
-        status: 'active',
-        skills_focus: agreement.skills,
-        meeting_frequency: agreement.frequency,
-        start_date: new Date().toISOString(),
-      };
-      relationships.push(newRelationship);
-      setStored(KEYS.RELATIONSHIPS, relationships);
-      
-      // Increment swaps for both users
-      const mentorIdx = users.findIndex(u => u.id === newRelationship.mentor_id);
-      const menteeIdx = users.findIndex(u => u.id === newRelationship.mentee_id);
-      if (mentorIdx !== -1) {
-        users[mentorIdx].help_swaps_completed += 1;
-        users[mentorIdx].trust_score = Math.min(5.0, users[mentorIdx].trust_score + 0.05);
-      }
-      if (menteeIdx !== -1) {
-        users[menteeIdx].help_swaps_completed += 1;
-        users[menteeIdx].trust_score = Math.min(5.0, users[menteeIdx].trust_score + 0.02);
-      }
-      setStored(KEYS.USERS, users);
-    }
-    
-    return true;
-  },
-
-  // --- REVIEWS ---
-  async submitReview(reviewerId: string, reviewerName: string, reviewerPhoto: string, reviewedUserId: string, rating: number, comment: string, tags: string[]): Promise<Review> {
+  // --- REVIEWS & RATING ENGINE ---
+  async submitReview(
+    reviewerId: string,
+    reviewerName: string,
+    reviewerPhoto: string,
+    reviewedUserId: string,
+    rating: number,
+    comment: string,
+    tags: string[]
+  ): Promise<Review> {
     await delay(600);
     const reviews = getStored<Review[]>(KEYS.REVIEWS, []);
     const users = getStored<User[]>(KEYS.USERS, []);
@@ -737,25 +1096,176 @@ export const mockServer = {
     reviews.push(newReview);
     setStored(KEYS.REVIEWS, reviews);
     
-    // Recalculate average rating, review count, and increase Trust Score!
-    const userIdx = users.findIndex(u => u.id === reviewedUserId);
-    if (userIdx !== -1) {
-      const u = users[userIdx];
-      const newTotal = (u.total_reviews || 0) + 1;
-      const newAvg = parseFloat((((u.average_rating * u.total_reviews) + rating) / newTotal).toFixed(2));
+    // Recalculate average rating & trust score for reviewed user
+    const reviewedIdx = users.findIndex(u => u.id === reviewedUserId);
+    if (reviewedIdx !== -1) {
+      const userReviews = reviews.filter(r => r.reviewed_user_id === reviewedUserId);
+      const totalRatings = userReviews.reduce((sum, r) => sum + r.rating, 0);
+      const avg = parseFloat((totalRatings / userReviews.length).toFixed(2));
       
-      // Trust Score goes up slightly with every verified review!
-      const newTrust = Math.min(5.0, parseFloat((u.trust_score + (rating >= 4 ? 0.05 : -0.1)).toFixed(2)));
+      users[reviewedIdx].total_reviews = userReviews.length;
+      users[reviewedIdx].average_rating = avg;
       
-      users[userIdx] = {
-        ...u,
-        total_reviews: newTotal,
-        average_rating: newAvg,
-        trust_score: newTrust
-      };
+      // Trust Score Algorithm: Base rating score (weight 70%) + streak score (weight 20%) + swaps score (weight 10%)
+      const baseRatingVal = (avg / 5.0) * 4.0; // max 4.0
+      const streakBonus = Math.min(0.5, (users[reviewedIdx].check_in_streak / 30) * 0.5); // max 0.5
+      const swapsBonus = Math.min(0.5, (users[reviewedIdx].help_swaps_completed / 50) * 0.5); // max 0.5
+      
+      const newScore = parseFloat(Math.min(5.0, baseRatingVal + streakBonus + swapsBonus).toFixed(2));
+      users[reviewedIdx].trust_score = newScore;
+      
       setStored(KEYS.USERS, users);
     }
     
     return newReview;
+  },
+
+  // --- MESSAGES & CHATS ---
+  async getMessages(activeUserId: string, otherUserId?: string): Promise<Message[]> {
+    await delay(300);
+    const messages = getStored<Message[]>(KEYS.MESSAGES, []);
+    
+    if (!otherUserId) {
+      // Return all messages for thread list parsing
+      return messages.filter(msg => msg.sender_id === activeUserId || msg.recipient_id === activeUserId)
+        .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+    }
+    
+    return messages.filter(msg => 
+      (msg.sender_id === activeUserId && msg.recipient_id === otherUserId) ||
+      (msg.sender_id === otherUserId && msg.recipient_id === activeUserId)
+    ).sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+  },
+
+  async sendMessage(senderId: string, recipientId: string, content: string, agreement_data?: Message['agreement_data']): Promise<Message> {
+    await delay(400);
+    const messages = getStored<Message[]>(KEYS.MESSAGES, []);
+    
+    const newMsg: Message = {
+      id: `msg-${Math.random().toString(36).substr(2, 9)}`,
+      sender_id: senderId,
+      recipient_id: recipientId,
+      content,
+      created_at: new Date().toISOString(),
+      agreement_data
+    };
+    
+    messages.push(newMsg);
+    setStored(KEYS.MESSAGES, messages);
+    
+    return newMsg;
+  },
+
+  async handleAgreement(messageId: string, status: 'accepted' | 'declined'): Promise<{ message: Message; relationship?: MentoringRelationship } | null> {
+    return this.respondToAgreement(messageId, status);
+  },
+
+  async respondToAgreement(messageId: string, status: 'accepted' | 'declined'): Promise<{ message: Message; relationship?: MentoringRelationship } | null> {
+    await delay(500);
+    const messages = getStored<Message[]>(KEYS.MESSAGES, []);
+    const relationships = getStored<MentoringRelationship[]>(KEYS.RELATIONSHIPS, []);
+    const users = getStored<User[]>(KEYS.USERS, []);
+
+    const msgIdx = messages.findIndex(m => m.id === messageId);
+    if (msgIdx !== -1 && messages[msgIdx].agreement_data) {
+      messages[msgIdx].agreement_data!.status = status;
+      
+      let relationship: MentoringRelationship | undefined;
+      const relId = messages[msgIdx].agreement_data!.relationship_id;
+      const rIdx = relationships.findIndex(r => r.id === relId);
+      
+      if (rIdx !== -1) {
+        relationships[rIdx].status = status === 'accepted' ? 'active' : 'declined';
+        relationship = relationships[rIdx];
+        setStored(KEYS.RELATIONSHIPS, relationships);
+
+        if (status === 'accepted') {
+          // Increment swaps completed for both users and boost their Trust Score!
+          const mIdx = users.findIndex(u => u.id === relationships[rIdx].mentor_id);
+          const meIdx = users.findIndex(u => u.id === relationships[rIdx].mentee_id);
+          
+          if (mIdx !== -1) {
+            users[mIdx].help_swaps_completed += 1;
+            users[mIdx].trust_score = parseFloat(Math.min(5.0, users[mIdx].trust_score + 0.2).toFixed(2));
+          }
+          if (meIdx !== -1) {
+            users[meIdx].help_swaps_completed += 1;
+            users[meIdx].trust_score = parseFloat(Math.min(5.0, users[meIdx].trust_score + 0.2).toFixed(2));
+          }
+          setStored(KEYS.USERS, users);
+        }
+      }
+      
+      setStored(KEYS.MESSAGES, messages);
+      return { message: messages[msgIdx], relationship };
+    }
+    return null;
+  },
+
+  // --- EVENTS ---
+  async getEvents(): Promise<Event[]> {
+    return this.fetchEvents();
+  },
+
+  async fetchEvents(): Promise<Event[]> {
+    await delay(300);
+    return getStored<Event[]>(KEYS.EVENTS, []);
+  },
+
+  async rsvpToEvent(userId: string, eventId: string, status: 'going' | 'interested' | 'declined'): Promise<EventRSVP> {
+    await delay(400);
+    const rsvps = getStored<EventRSVP[]>(KEYS.RSVPS, []);
+    const events = getStored<Event[]>(KEYS.EVENTS, []);
+    
+    // Check if RSVP already exists
+    const idx = rsvps.findIndex(r => r.user_id === userId && r.event_id === eventId);
+    const newRsvp: EventRSVP = {
+      id: idx !== -1 ? rsvps[idx].id : `rsvp-${Math.random().toString(36).substr(2, 9)}`,
+      user_id: userId,
+      event_id: eventId,
+      status,
+      created_at: new Date().toISOString(),
+    };
+    
+    if (idx !== -1) {
+      rsvps[idx] = newRsvp;
+    } else {
+      rsvps.push(newRsvp);
+      
+      // Increment event attendee count
+      const eIdx = events.findIndex(e => e.id === eventId);
+      if (eIdx !== -1) {
+        events[eIdx].current_attendees = Math.min(events[eIdx].capacity, events[eIdx].current_attendees + 1);
+        setStored(KEYS.EVENTS, events);
+      }
+    }
+    
+    setStored(KEYS.RSVPS, rsvps);
+    return newRsvp;
+  },
+
+  async getMyRSVPs(userId: string): Promise<EventRSVP[]> {
+    await delay(300);
+    const rsvps = getStored<EventRSVP[]>(KEYS.RSVPS, []);
+    return rsvps.filter(r => r.user_id === userId);
+  },
+
+  async requestMentoring(mentorId: string, menteeId: string, skillsFocus: string[]): Promise<MentoringRelationship> {
+    await delay(500);
+    const relationships = getStored<MentoringRelationship[]>(KEYS.RELATIONSHIPS, []);
+    
+    const newRelationship: MentoringRelationship = {
+      id: `rel-${Math.random().toString(36).substr(2, 9)}`,
+      mentor_id: mentorId,
+      mentee_id: menteeId,
+      status: 'pending',
+      skills_focus: skillsFocus,
+      meeting_frequency: 'Bi-weekly',
+      start_date: new Date().toISOString(),
+    };
+    
+    relationships.push(newRelationship);
+    setStored(KEYS.RELATIONSHIPS, relationships);
+    return newRelationship;
   }
 };

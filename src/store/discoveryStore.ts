@@ -48,11 +48,11 @@ export const useDiscoveryStore = create<DiscoveryState>()((set, get) => {
 
         const allEvents = await mockServer.getEvents();
         // Simple client-side filtering on events
-        const filteredEvents = allEvents.filter(event => {
-          if (skill && !event.skill_tags.some(s => s.toLowerCase().includes(skill.toLowerCase()))) {
+        const filteredEvents = allEvents.filter((event: Event) => {
+          if (skill && !event.skill_tags.some((s: string) => s.toLowerCase().includes(skill.toLowerCase()))) {
             return false;
           }
-          if (value && !event.value_tags.some(v => v.toLowerCase().includes(value.toLowerCase()))) {
+          if (value && !event.value_tags.some((v: string) => v.toLowerCase().includes(value.toLowerCase()))) {
             return false;
           }
           return true;
