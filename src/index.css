@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-sage: #3D5941;
+  --color-sage-light: #eff3f0;
+  --color-sage-border: rgba(61, 89, 65, 0.2);
+  --color-sage-hover: #2d4230;
+  --color-clay: #C4956D;
+  --color-clay-light: #f7ede4;
+  --color-cream: #FAF8F3;
+  --color-cream-dark: #f0ebe0;
+  --color-charcoal: #2C3E35;
+  --color-charcoal-muted: #536c60;
+  --color-ochre: #D4A574;
+  --color-ochre-light: #fbf6f0;
+  
+  --font-serif: Georgia, Cambria, serif;
+  --font-sans: Inter, Outfit, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  
+  --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-slide-up: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-scale-in: scale-in 0.2s ease-out;
+  
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { transform: translateY(12px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes scale-in {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+}
+
+/* Custom Base Layout Override for Premium Look */
+html, body {
+  background-color: #FAF8F5;
+  color: #1D2B1E;
+  font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Premium Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4956D;
+  border-radius: 9999px;
+  border: 2px solid #FAF8F5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3D5941;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(29, 43, 30, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.glass-panel-dark {
+  background: rgba(29, 43, 30, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(250, 248, 243, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Elegant Text Shadows */
+.text-glow-ochre {
+  text-shadow: 0 0 12px rgba(212, 165, 116, 0.4);
+}
+
+.text-glow-sage {
+  text-shadow: 0 0 12px rgba(61, 89, 65, 0.3);
+}
+
+/* Base Styles for Headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  color: #1D2B1E;
+}
+
+/* Custom hover card effect */
+.hover-premium {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-premium:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px rgba(29, 43, 30, 0.15);
+  border-color: #C4956D;
+}
+
