@@ -14,7 +14,7 @@ interface AuthState {
   register: (data: Partial<User>) => Promise<boolean>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<boolean>;
-  verifyDomainEmail: (type: 'work' | 'school', email: string) => Promise<boolean>;
+  verifyDomainEmail: (type: 'work' | 'school' | 'business', email: string) => Promise<boolean>;
 }
 
 export const useAuthStore = create<AuthState>()((set, get) => {
@@ -124,7 +124,7 @@ export const useAuthStore = create<AuthState>()((set, get) => {
             job_title: activeUser.job_title || 'Professional Partner',
             trust_score: Math.min(5.0, get().user!.trust_score + 0.3) // verified domains boost trust score!
           };
-        } else {
+        } else if (type === 'school') {
           const univName = domain.split('.')[0];
           const niceUnivName = univName.charAt(0).toUpperCase() + univName.slice(1) + ' University';
           updates = {
@@ -134,6 +134,16 @@ export const useAuthStore = create<AuthState>()((set, get) => {
             university_name: niceUnivName,
             department: activeUser.department || 'Computer Science',
             trust_score: Math.min(5.0, get().user!.trust_score + 0.25)
+          };
+        } else {
+          const bizName = domain.split('.')[0];
+          const niceBizName = bizName.charAt(0).toUpperCase() + bizName.slice(1) + ' & Co.';
+          updates = {
+            business_email: email,
+            business_email_verified: true,
+            business_domain: domain,
+            business_name: niceBizName,
+            trust_score: Math.min(5.0, get().user!.trust_score + 0.35)
           };
         }
 

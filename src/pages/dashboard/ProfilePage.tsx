@@ -227,6 +227,21 @@ export default function ProfilePage() {
                 </div>
               )}
 
+              {profile.business_email_verified ? (
+                <div className="bg-ochre/5 border border-ochre/15 rounded-2xl p-3 flex gap-3 items-center text-glow-ochre animate-scale-in">
+                  <ShieldCheck className="w-5 h-5 text-ochre shrink-0" />
+                  <div className="text-xs text-left leading-normal text-ochre">
+                    <span className="font-bold block">Verified Business Owner</span>
+                    <span className="text-charcoal/70">Owner @ {profile.business_name}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-cream/45 border border-charcoal/5 rounded-2xl p-3 flex gap-3 items-center opacity-60">
+                  <HelpCircle className="w-5 h-5 text-charcoal/40 shrink-0" />
+                  <span className="text-xs text-charcoal/50 font-sans">No verified local business domain</span>
+                </div>
+              )}
+
               {profile.is_founding_member && (
                 <div className="bg-ochre/10 border border-ochre/20 rounded-2xl p-3.5 flex flex-col gap-3 text-glow-ochre relative overflow-hidden">
                   <div className="flex gap-3 items-center">
@@ -245,6 +260,56 @@ export default function ProfilePage() {
                   </button>
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* Local Collaboration & Interactions Rewards Board */}
+          <div className="bg-white border border-charcoal/8 rounded-3xl p-6.5 shadow-sm space-y-4">
+            <h4 className="font-serif font-bold text-charcoal text-base flex items-center gap-1.5">
+              🏆 Collaboration Rewards
+            </h4>
+            <p className="text-[11px] text-charcoal-muted mt-0.5">Earn custom badges and reputation multipliers by showing up locally.</p>
+            
+            <div className="space-y-3 pt-1">
+              {profile.check_in_streak >= 5 ? (
+                <div className="bg-rose/5 border border-rose/20 rounded-2xl p-3 flex gap-3 items-center animate-scale-in">
+                  <span className="text-2xl">🔥</span>
+                  <div className="text-xs text-left leading-normal text-rose font-bold">
+                    <span>Consistent Steward</span>
+                    <span className="text-charcoal/70 block font-normal">Active {profile.check_in_streak}-day check-in streak rewarded!</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="border border-charcoal/5 border-dashed rounded-2xl p-3 flex gap-3 items-center opacity-45">
+                  <span className="text-xl grayscale">🔥</span>
+                  <div className="text-xs text-left leading-normal text-charcoal/60">
+                    <span className="font-bold block">Consistent Steward</span>
+                    <span>Reach a 5-day check-in streak to unlock.</span>
+                  </div>
+                </div>
+              )}
+
+              {profile.help_swaps_completed > 0 ? (
+                <div className="bg-sage/5 border border-sage/20 rounded-2xl p-3 flex gap-3 items-center animate-scale-in">
+                  <span className="text-2xl">🤝</span>
+                  <div className="text-xs text-left leading-normal text-sage font-bold">
+                    <span>Reciprocity Champion</span>
+                    <span className="text-charcoal/70 block font-normal font-sans">Successfully completed {profile.help_swaps_completed} covenants!</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="border border-charcoal/5 border-dashed rounded-2xl p-3 flex gap-3 items-center opacity-45">
+                  <span className="text-xl grayscale">🤝</span>
+                  <div className="text-xs text-left leading-normal text-charcoal/60">
+                    <span className="font-bold block">Reciprocity Champion</span>
+                    <span>Sign & complete 1 covenant to unlock.</span>
+                  </div>
+                </div>
+              )}
+              
+              <div className="bg-indigo/5 border border-indigo/15 rounded-2xl p-3.5 text-[10px] text-indigo leading-relaxed">
+                💡 <strong>Local Reward:</strong> Unlocking rewards boosts discoverability in local search by 25% and expands your Founding Circle voting weight!
+              </div>
             </div>
           </div>
 

@@ -9,8 +9,10 @@ export default function SettingsPage() {
 
   const [workEmail, setWorkEmail] = useState('');
   const [schoolEmail, setSchoolEmail] = useState('');
+  const [businessEmail, setBusinessEmail] = useState('');
   const [verifyingWork, setVerifyingWork] = useState(false);
   const [verifyingSchool, setVerifyingSchool] = useState(false);
+  const [verifyingBusiness, setVerifyingBusiness] = useState(false);
 
   // Toggle state simulation
   const [notifEmail, setNotifEmail] = useState(true);
@@ -63,7 +65,30 @@ export default function SettingsPage() {
         colors: ['#C4956D', '#FAF8F3']
       });
       toast.success('School Email verified! Academic Sprout Badge unlocked.');
-      setSchoolEmail('');
+    }
+  };
+
+  const handleVerifyBusiness = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!businessEmail) return;
+    if (!businessEmail.includes('@') || businessEmail.split('@')[1].length < 3) {
+      toast.error('Please enter a valid business email.');
+      return;
+    }
+
+    setVerifyingBusiness(true);
+    const success = await verifyDomainEmail('business', businessEmail);
+    setVerifyingBusiness(false);
+
+    if (success) {
+      confetti({
+        particleCount: 80,
+        spread: 60,
+        origin: { y: 0.6 },
+        colors: ['#D4A574', '#FAF8F3']
+      });
+      toast.success('Business Email verified! Local Business Owner Badge unlocked.');
+      setBusinessEmail('');
     }
   };
 
@@ -182,6 +207,60 @@ export default function SettingsPage() {
                   className="w-full bg-clay text-white font-medium py-3 rounded-xl hover:bg-clay/90 transition-all flex items-center justify-center gap-1.5 disabled:opacity-50"
                 >
                   Verify School Email
+                </button>
+              </form>
+            )}
+          </div>
+
+          {/* Business Owner verification widget */}
+          <div className="bg-white border border-charcoal/8 rounded-3xl p-6.5 shadow-sm space-y-5">
+            <div className="flex gap-3">
+              <div className="w-10 h-10 bg-ochre/15 text-ochre rounded-xl flex items-center justify-center">
+                <Mail className="w-5.5 h-5.5" />
+              </div>
+              <div className="text-left">
+                <h3 className="font-serif text-lg font-bold text-charcoal">Verify Local Business Owner</h3>
+                <p className="text-xs text-charcoal-muted">Unlock a verified Local Business Owner badge and boost your Trust Score (+0.35).</p>
+              </div>
+            </div>
+
+            {user.business_email_verified ? (
+              <div className="bg-sage/5 border border-sage/15 rounded-2xl p-4 flex gap-3.5 items-center animate-scale-in">
+                <ShieldCheck className="w-6 h-6 text-sage shrink-0" />
+                <div className="text-xs text-left leading-normal">
+                  <span className="font-bold text-sage block">Verification Complete ✓</span>
+                  <span className="text-charcoal/70">
+                    Your local business email <strong>{user.business_email}</strong> is domain verified.
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleVerifyBusiness} className="space-y-4 animate-scale-in">
+                <div className="bg-ochre/5 border border-ochre/15 rounded-xl p-3.5 text-[11px] text-ochre leading-normal flex gap-2">
+                  <span className="shrink-0 mt-0.5">💡</span>
+                  <p>
+                    <strong>Simulated Test Domains:</strong> Entering any custom business email domain (e.g. <code>owner@mycafe.com</code>, <code>info@sprouts.org</code>) will instantly complete and unlock your Business Owner badge.
+                  </p>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-charcoal uppercase tracking-wider block">Business Email Address</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="owner@mycafe.com"
+                    value={businessEmail}
+                    onChange={e => setBusinessEmail(e.target.value)}
+                    className="w-full px-4 py-2.5 bg-cream/20 border border-charcoal/10 rounded-xl text-sm focus:border-sage focus:outline-none font-medium"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={verifyingBusiness || !businessEmail}
+                  className="w-full bg-ochre text-white font-medium py-3 rounded-xl hover:bg-ochre/90 transition-all flex items-center justify-center gap-1.5 disabled:opacity-50 font-bold"
+                >
+                  Verify Business Email
                 </button>
               </form>
             )}

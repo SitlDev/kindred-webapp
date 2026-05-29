@@ -39,6 +39,11 @@ export interface User {
   university_name?: string;
   department?: string;
   university_domain?: string;
+
+  business_email?: string;
+  business_email_verified?: boolean;
+  business_name?: string;
+  business_domain?: string;
   
   // Trust Signals
   help_swaps_completed: number;
